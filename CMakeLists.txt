@@ -16,7 +16,7 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "src/*.hpp" "include/*.hpp")
 
 
 if(WIN32)
-    add_executable(GeneticSimulation WIN32 ${SOURCES} ${HEADERS})
+    add_executable(GeneticSimulation ${SOURCES} ${HEADERS})
 else()
     add_executable(GeneticSimulation ${SOURCES} ${HEADERS})
 endif()
