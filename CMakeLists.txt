@@ -1,23 +1,30 @@
 cmake_minimum_required(VERSION 3.15)
 
-add_subdirectory(vendor/SDL)
-
 project(GeneticSimulation CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(vendor/SDL)
 
 include_directories(include)
 
-set(SOURCES
-    src/main.cpp
-)
 
-add_executable(GeneticSimulation ${SOURCES})
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 
+file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "src/*.hpp" "include/*.hpp")
+
+
+if(WIN32)
+    add_executable(GeneticSimulation WIN32 ${SOURCES} ${HEADERS})
+else()
+    add_executable(GeneticSimulation ${SOURCES} ${HEADERS})
+endif()
+
+target_link_libraries(GeneticSimulation PRIVATE SDL3::SDL3)
 
 if(MSVC)
     target_compile_options(GeneticSimulation PRIVATE /W4)
 else()
-    target_compile_options(GeneticSimulation PRIVATE -Wall -Wextra) #ligne 20
+    target_compile_options(GeneticSimulation PRIVATE -Wall -Wextra)
 endif()
