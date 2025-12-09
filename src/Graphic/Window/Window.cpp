@@ -59,24 +59,6 @@ void Window::SetTitle(std::string new_title){
     SDL_SetWindowTitle(this->gSDLWindow, new_title.data());
 }
 
-// SDL_Texture** load_textures(){
-//     SDL_Texture **tab = malloc(sizeof(SDL_Texture *) * N_TEXTURES);
-//     tab[pawn] = load_image("./imgs/pawn.bmp");
-//     tab[rook] = load_image("./imgs/rook.bmp");
-//     tab[queen] = load_image("./imgs/queen.bmp");
-//     tab[king] = load_image("./imgs/king.bmp");
-//     tab[knight] = load_image("./imgs/knight.bmp");
-//     tab[bishop] = load_image("./imgs/bishop.bmp");
-//     return tab;
-// }
-
-void Window::DestroyTextures(SDL_Texture** tab){
-    for (int i = 0; i < N_TEXTURES; i++){
-        SDL_DestroyTexture(tab[0]);
-    }
-    free(tab);
-}
-
 
 bool Window::ManageEvents(){
     SDL_Event e;
@@ -135,17 +117,6 @@ void Window::Render(){
 void Window::CloseWindow(){
     this->gDone = true;
 }
-
-void Window::UpdateWindow() {
-
-    if (!ManageEvents())
-    {
-        CloseWindow();
-    }else{
-        Render();
-    }
-}
-
 
 SDL_Renderer* Window::GetRenderer(){
     return this->gSDLRenderer;

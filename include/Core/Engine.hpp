@@ -1,17 +1,16 @@
 #pragma once
-#include <Graphic/Window/Window.hpp>
+#include <Graphic/GraphicEngine.hpp>
 
-class Engine: public Window
+class Engine: public GraphicEngine
 {
 private:
-    int dt;
+    double dt;
 public:
     Engine(int width, int height);
     ~Engine();
     void Start();
     void Terminate();
     void Main();
-    void UpdateGraphic();
     void UpdateLogic();
 };
 
