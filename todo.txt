@@ -1,0 +1,10 @@
+
+Code:
+-Rendre SDL3 utilisable i.e implémenter une petite fenêtre. DONE
+-Afficher une texture
+
+
+
+Autres:
+-Gérer les problèmes de SDL3.dll n'étant pas dans le bon dossier
+-Faire le todo
