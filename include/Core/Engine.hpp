@@ -1,5 +1,5 @@
 #pragma once
-#include <Graphic/Window/Window.h>
+#include <Graphic/Window/Window.hpp>
 
 class Engine: public Window
 {

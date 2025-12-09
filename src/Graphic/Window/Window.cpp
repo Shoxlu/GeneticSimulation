@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <Graphic/Window/Window.h>
-#include <Utils/Error/error.h>
+#include <Graphic/Window/Window.hpp>
+#include <Utils/Error/error.hpp>
 
 /*
 Written by MILCENDEAU Timothée 2025
