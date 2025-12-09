@@ -5,10 +5,8 @@
 
 GraphicEngine::GraphicEngine(int width, int height):Window(width, height)
 {
-    SetUserFunc(GraphicEngine::UserRender,nullptr);
+    SetUserFunc(nullptr,nullptr);
     SetTitle("Genetic Simulation");
-    Texture test = GetTexture("../img/pawn.bmp");
-    Texture test2 = GetTexture("../img/pawn.bmp");
     log_printf("Fin de l'init.\n");
 }
 
@@ -18,7 +16,9 @@ Texture GraphicEngine::GetTexture(const char* path){
 
 
 void GraphicEngine::UserRender(){
-    
+    Texture text = GetTexture("../img/pawn.bmp");
+    Vec pos(200, 300);
+    textureManager.DrawTexture(*this, pos, text.data, nullptr);
 }
 
 void GraphicEngine::UpdateGraphic(){
@@ -27,7 +27,10 @@ void GraphicEngine::UpdateGraphic(){
     {
         CloseWindow();
     }else{
-        Render();
+        SDL_Delay(16);
+        SDL_RenderClear(GetRenderer());
+        UserRender();
+        SDL_RenderPresent(GetRenderer());
     }
 }
 

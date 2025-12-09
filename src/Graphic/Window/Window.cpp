@@ -45,13 +45,14 @@ int Window::InitWindow(int height, int width){
 }
 
 void Window::SetUserFunc( void(*render_func)(), void (*user_events)()){
+    log_printf("ATTENTION LES FONCTIONS DE RENDUS PERSONNALISEES NE SONT PLUS SUPPORTEES\n");
     if(render_func == NULL){
         log_printf("Pas de fonction de rendu ? Une fonction de rendu par défaut sera utilisé\n");
     }
     if(user_events == NULL){
         log_printf("Pas de fonction d'events ? Les events par défaut seront pris en compte\n");
     }
-    this->render_function = render_func;
+    //this->render_function = render_func;
     this->user_events = user_events;
 }
 
@@ -78,40 +79,6 @@ bool Window::ManageEvents(){
         }
     }
     return true;
-}
-
-//Inutilisé
-// void Window::draw(){
-//     char* pix;
-//     int pitch;
-//     SDL_LockTexture(this->gSDLTexture, NULL, (void**)&pix, &pitch);
-//     //Fill the texture with the frameBuffer (the texture is the entire screen)
-//     for (int i = 0, sp = 0, dp = 0; i < this->height; i++, dp += this->width, sp += pitch){
-//         memcpy(&pix[sp], &this->gFrameBuffer[dp], this->width * 4);
-//     }
-//     SDL_UnlockTexture(this->gSDLTexture);  
-// }
-
-// void clear_frame_buffer(){
-//     for (int i = 0, c = 0; i < this->height; i++)
-//     {
-//         for (int j = 0; j < this->width; j++, c++)
-//         {
-//             this->gFrameBuffer[c] = 0;
-//         }
-//     }
-// }
-void default_render() {
-}
-
-void Window::Render(){
-    SDL_Delay(16);
-    SDL_RenderClear(this->gSDLRenderer);
-    if(this->render_function == NULL){
-        this->render_function = default_render;
-    }
-    this->render_function();
-    SDL_RenderPresent(this->gSDLRenderer);
 }
 
 void Window::CloseWindow(){

@@ -12,6 +12,6 @@ public:
     GraphicEngine(int width, int height);
     ~GraphicEngine();
     void UpdateGraphic();
-    static void UserRender();
+    void UserRender();
     Texture GetTexture(const char *path);
 };
