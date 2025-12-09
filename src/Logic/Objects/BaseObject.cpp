@@ -1,15 +1,15 @@
-#include <Logic/Objects/BaseObject.h>
+#include <Logic/Objects/BaseObject.hpp>
 
-//Constructor for BaseObject
+//Constructeur pour BaseObject
 BaseObject::BaseObject(){
   
 }
 
-//Destructor for BaseObject
+//Destructeur pour BaseObject
 BaseObject::~BaseObject(){
 }
 
-//Updates BaseObject Caracteristics
+//Actualise les caractéristiques de BaseObject
 void BaseObject::Update(){
     
 }
