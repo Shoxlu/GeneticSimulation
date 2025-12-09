@@ -12,7 +12,7 @@ include_directories(include)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 
-file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "src/*.hpp" "include/*.hpp")
+file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "src/*.hpp" "src/*.h" "include/*.h" "include/*.hpp")
 
 
 if(WIN32)
