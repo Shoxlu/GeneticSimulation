@@ -1,10 +1,13 @@
 #pragma once
 
 class BaseObject{
-    public:
-        BaseObject();
-        ~BaseObject();
-        void Update();
-
-    private:
+//Accessible by everyone
+public:
+    BaseObject();
+    ~BaseObject();
+    void Update();
+//Accessible by only the inheriters and itself
+protected:
+//Accessible by only itself
+private:
 };

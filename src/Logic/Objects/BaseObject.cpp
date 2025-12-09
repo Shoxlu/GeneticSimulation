@@ -1,4 +1,4 @@
-#include <BaseObject.h>
+#include <Logic/Objects/BaseObject.h>
 
 //Constructor for BaseObject
 BaseObject::BaseObject(){
