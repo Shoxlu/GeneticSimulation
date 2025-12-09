@@ -1,16 +1,11 @@
 #include <main.h>
-#include <Graphic/Window/Window.h>
-#include <Utils/Error/error.h>
+#include <Core/Engine.h>
+
+
 
 int main(){
-    printf("Hello world\n");
-    Window window(600, 1000, nullptr, nullptr);
-    window.SetTitle("Genetic Simulation");
-    while (!window.WindowClosed())
-    {
-        window.UpdateTest();
-    }
-    window.TermintateWindow();
-
+    Engine engine(600, 1000);
+    engine.Start();
+    engine.Terminate();
     return 0;
 }

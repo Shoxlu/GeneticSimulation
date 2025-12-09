@@ -11,17 +11,19 @@ Inspired from SOL's tutorial on SDL
 
 class Window{
     public:
-        Window(int height, int width, void(*render_func)(), void (*user_events)());
-        int InitWindow(int h, int w, void(*render_func)(), void (*user_events)());
+        Window(int height, int width);
+        int InitWindow(int h, int w);
         void TermintateWindow();
-        bool Update();
-        void UpdateTest();
+        void UpdateWindow();
         void SetTitle(std::string new_title);
         SDL_Renderer *GetRenderer();
         // SDL_Texture **load_textures();
         void DestroyTextures(SDL_Texture **tab);
         bool WindowClosed();
+        void SetUserFunc(void (*render_func)(), void (*user_events)());
         bool ManageEvents();
+        void Render();
+        void CloseWindow();
 
     private:
         std::string title;

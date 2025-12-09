@@ -9,12 +9,12 @@ Inspired from SOL's tutorial on SDL
 */
 
 
-Window::Window(int height, int width, void(*render_func)(), void (*user_events)()){
-    InitWindow(height, width, render_func, user_events);
+Window::Window(int height, int width){
+    InitWindow(height, width);
 }
 
 //Initialise la fenêtre SDL
-int Window::InitWindow(int height, int width, void(*render_func)(), void (*user_events)()){
+int Window::InitWindow(int height, int width){
     //Initialise SDL pour la video et les events
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
     {
@@ -33,6 +33,18 @@ int Window::InitWindow(int height, int width, void(*render_func)(), void (*user_
     this->gSDLTexture = SDL_CreateTexture(this->gSDLRenderer,
         SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING,
         width, height);
+    this->gDone = false;
+    SDL_SetRenderDrawColor(this->gSDLRenderer, 30, 30, 30, 255);
+    if (!this->gSDLWindow || !this->gSDLRenderer || !this->gSDLTexture)
+    {
+        log_printf("Echec de l'initialisation de Window\n");
+        return -1;
+    }
+        
+    return 0;
+}
+
+void Window::SetUserFunc( void(*render_func)(), void (*user_events)()){
     if(render_func == NULL){
         log_printf("Pas de fonction de rendu ? Une fonction de rendu par défaut sera utilisé\n");
     }
@@ -41,14 +53,6 @@ int Window::InitWindow(int height, int width, void(*render_func)(), void (*user_
     }
     this->render_function = render_func;
     this->user_events = user_events;
-    this->gDone = false;
-    if (!this->gSDLWindow || !this->gSDLRenderer || !this->gSDLTexture)
-    {
-        log_printf("Echec de l'initialisation de Window\n");
-        return -1;
-    }
-        
-    return 0;
 }
 
 void Window::SetTitle(std::string new_title){
@@ -118,29 +122,28 @@ bool Window::ManageEvents(){
 void default_render() {
 }
 
-void Window::UpdateTest() {
-
-    if (!Update())
-    {
-        this->gDone = true;
-    }else{
-        if(this->render_function == NULL){
-            this->render_function = default_render;
-        }
-        this->render_function();
-        SDL_RenderPresent(this->gSDLRenderer);
-    }
-}
-
-bool Window::Update()
-{
-    if(!ManageEvents()){
-        return false;
-    }
-    SDL_SetRenderDrawColor(this->gSDLRenderer, 30, 30, 30, 255);
+void Window::Render(){
     SDL_Delay(16);
     SDL_RenderClear(this->gSDLRenderer);
-    return true;
+    if(this->render_function == NULL){
+        this->render_function = default_render;
+    }
+    this->render_function();
+    SDL_RenderPresent(this->gSDLRenderer);
+}
+
+void Window::CloseWindow(){
+    this->gDone = true;
+}
+
+void Window::UpdateWindow() {
+
+    if (!ManageEvents())
+    {
+        CloseWindow();
+    }else{
+        Render();
+    }
 }
 
 

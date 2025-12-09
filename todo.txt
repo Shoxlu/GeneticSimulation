@@ -1,6 +1,7 @@
 
 Code:
 -Rendre SDL3 utilisable i.e implémenter une petite fenêtre. DONE
+-Donner une structure à l'application
 -Afficher une texture
 
 
