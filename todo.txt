@@ -2,7 +2,9 @@
 Code:
 -Rendre SDL3 utilisable i.e implémenter une petite fenêtre. DONE
 -Donner une structure à l'application
--Afficher une texture
+-Afficher une texture. DONE 
+-Créer les classes "Objects" et ses dérivées.
+
 
 
 
