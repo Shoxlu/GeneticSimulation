@@ -5,10 +5,10 @@
 void tests();
 
 int main(){
-    // Engine engine(600, 1000);
-    // engine.Start();
-    // engine.Terminate();
     tests();
+    Engine engine(600, 1000);
+    engine.Start();
+    engine.Terminate();
     return 0;
 }
 
