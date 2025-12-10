@@ -15,6 +15,15 @@ Vec::~Vec(){
 
 }
 
+bool Vec::operator==(const Vec& other){
+    return x == other.x && y == other.y;
+}
+
+bool Vec::operator!=(const Vec& other){
+    return !(*this == other);
+}
+
+
 Vec& Vec::operator+=(const Vec& other){
     x+=other.x;
     y+=other.y;
@@ -43,14 +52,12 @@ Vec& Vec::operator/=(double scalar){
     return *this;
 }
 
-Vec operator+(Vec a, const Vec& b){
-    a+=b;
-    return a;
+Vec Vec::operator+(const Vec& b) const {
+    return Vec(x+b.x, y+b.y);
 }
 
-Vec operator-(Vec a, const Vec& b){
-    a-=b;
-    return a;
+Vec Vec::operator-(const Vec& b) const{
+    return Vec(x-b.x, y-b.y);
 }
 
 Vec operator*(float scalar, Vec a){
@@ -63,9 +70,8 @@ Vec operator*(Vec a, float scalar){
     return a;
 }
 
-Vec operator/(Vec a, float scalar){
-    a/=scalar;
-    return a;
+Vec Vec::operator/(float scalar){
+    return Vec(x/scalar, y/scalar);
 }
 
 double dot(const Vec& a,const Vec& b){
@@ -79,3 +85,5 @@ double dist_sq(const Vec& a,const Vec& b){
 double dist(const Vec& a,const Vec& b){
     return sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
 }
+
+

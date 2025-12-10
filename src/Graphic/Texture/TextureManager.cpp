@@ -93,13 +93,12 @@ void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL
 {
     float w, h;
     SDL_GetTextureSize(texture, &w, &h);
-    SDL_FRect dst = {pos.x, pos.y, w, h};
+    SDL_FRect dst = {(float)pos.x, (float)pos.y, w, h};
     SDL_RenderTexture(win.GetRenderer(), texture, rect, &dst);
 }
 
 void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)
 {
-    SDL_FRect dst = {pos.x, pos.y, wh.x, wh.y};
+    SDL_FRect dst = {(float)pos.x, (float)pos.y, (float)wh.x, (float)wh.y};
     SDL_RenderTexture(win.GetRenderer(), texture, src, &dst);
-
 }

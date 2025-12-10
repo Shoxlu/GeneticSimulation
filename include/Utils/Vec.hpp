@@ -15,14 +15,16 @@ public:
     Vec& operator-=(const Vec& other);
     Vec& operator*=(double scalar);
     Vec& operator/=(double scalar);
+    bool operator==(const Vec &other);
+    bool operator!=(const Vec &other);
     Vec operator-();
+    Vec operator+(const Vec& b) const;
+    Vec operator-(const Vec& b) const;
+    Vec operator/(float scalar);
 };
 
-Vec operator+(Vec a, const Vec& b);
-Vec operator-(Vec a, const Vec& b);
 Vec operator*(Vec a, float scalar);
 Vec operator*(float scalar, Vec a);
-Vec operator/(Vec a, float scalar);
 double dot(const Vec& a,const Vec& b);
 double dist_sq(const Vec& a,const Vec& b);
 double dist(const Vec& a,const Vec& b);
