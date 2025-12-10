@@ -3,12 +3,6 @@
 #include <Graphic/Window/Window.hpp>
 #include <Utils/Error/error.hpp>
 
-/*
-Written by MILCENDEAU Timothée 2025
-Inspired from SOL's tutorial on SDL
-*/
-
-
 Window::Window(int height, int width){
     InitWindow(height, width);
 }

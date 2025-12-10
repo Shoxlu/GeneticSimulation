@@ -2,10 +2,6 @@
 #include <SDL3/SDL.h>
 #include <vector>
 #include <string>
-/*
-Written by MILCENDEAU Timothée 2025
-Inspired from SOL's tutorial on SDL
-*/
 
 class Window{
 public:
