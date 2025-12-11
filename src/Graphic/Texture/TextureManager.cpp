@@ -12,13 +12,19 @@ TextureManager::~TextureManager(){
     }
 }
 
-Texture TextureManager::GetImage(const char* path){
+void TextureManager::FreeTexture(const char* path){
+    Texture texture = textures[path];
+    if(texture.data)
+        texture.FreeTexture();
+}
+
+Texture TextureManager::GetTexture(const char* path){
     Texture texture = textures[path];
     return texture;
 }
 
 Texture TextureManager::LoadImage(Window& win, const char* path){
-    Texture text = GetImage(path);
+    Texture text = GetTexture(path);
     if(text.data){
         //log_printf("La texture existait déjà, elle est réutilisée.\n");
         return text;
