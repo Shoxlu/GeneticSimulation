@@ -18,7 +18,7 @@ Texture GraphicEngine::GetTexture(const char* path){
 void GraphicEngine::UserRender(){
     Texture text = GetTexture("../img/pawn.bmp");
     Vec pos(200, 300);
-    textureManager.DrawTexture(*this, pos, text.data, nullptr);
+    textureManager.DrawTexture(*this, pos, text.data);
 }
 
 void GraphicEngine::UpdateGraphic(){

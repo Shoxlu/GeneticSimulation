@@ -20,7 +20,7 @@ Texture TextureManager::GetImage(const char* path){
 Texture TextureManager::LoadImage(Window& win, const char* path){
     Texture text = GetImage(path);
     if(text.data){
-        log_printf("La texture existait déjà, elle est réutilisée.\n");
+        //log_printf("La texture existait déjà, elle est réutilisée.\n");
         return text;
     }
     //Charge un bmp
@@ -89,16 +89,31 @@ void TextureManager::ClearTexture(SDL_Texture* texture)
     SDL_UnlockTexture(texture);
 }
 
-void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL_FRect* rect)
+void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture)
+{
+    DrawTexture(win, pos, texture, nullptr, 1.0, 1.0);
+}
+
+void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL_FRect* src)
+{
+    DrawTexture(win, pos, texture, src, 1.0, 1.0);
+}
+
+void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
+{
+    DrawTexture(win, pos, texture, nullptr, x_mult, y_mult);
+}
+
+void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
 {
     float w, h;
     SDL_GetTextureSize(texture, &w, &h);
-    SDL_FRect dst = {(float)pos.x, (float)pos.y, w, h};
-    SDL_RenderTexture(win.GetRenderer(), texture, rect, &dst);
-}
-
-void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)
-{
-    SDL_FRect dst = {(float)pos.x, (float)pos.y, (float)wh.x, (float)wh.y};
+    SDL_FRect dst = {(float)pos.x, (float)pos.y, w*x_mult, h*y_mult};
     SDL_RenderTexture(win.GetRenderer(), texture, src, &dst);
 }
+//Obsolete ?
+// void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)
+// {
+//     SDL_FRect dst = {(float)pos.x, (float)pos.y, (float)wh.x, (float)wh.y};
+//     SDL_RenderTexture(win.GetRenderer(), texture, src, &dst);
+// }
