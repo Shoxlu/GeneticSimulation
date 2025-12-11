@@ -17,19 +17,13 @@ int Window::InitWindow(int height, int width){
     }
     this->height = height;
     this->width = width;
-    //Matrice linéarisée des pixels
-    this->gFrameBuffer.resize(height * width);
     //Création de la fenêtre 
     this->gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
     //Création du Renderer (?)
     this->gSDLRenderer = SDL_CreateRenderer(this->gSDLWindow, NULL);
-    //Création d'une texture
-    this->gSDLTexture = SDL_CreateTexture(this->gSDLRenderer,
-        SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING,
-        width, height);
     this->gDone = false;
     SDL_SetRenderDrawColor(this->gSDLRenderer, 30, 30, 30, 255);
-    if (!this->gSDLWindow || !this->gSDLRenderer || !this->gSDLTexture)
+    if (!this->gSDLWindow || !this->gSDLRenderer)
     {
         log_printf("Echec de l'initialisation de Window\n");
         return -1;
@@ -86,7 +80,6 @@ SDL_Renderer* Window::GetRenderer(){
 void Window::TermintateWindow(){
     log_printf("Fin de l'appli!\n");
     //Libère toutes les ressources
-    SDL_DestroyTexture(this->gSDLTexture);
     SDL_DestroyRenderer(this->gSDLRenderer);
     SDL_DestroyWindow(this->gSDLWindow);
     SDL_Quit();

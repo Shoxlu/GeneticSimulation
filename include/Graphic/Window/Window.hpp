@@ -18,10 +18,8 @@ public:
 
 private:
     std::string title;
-    std::vector<int> gFrameBuffer;
     SDL_Window *gSDLWindow;
     SDL_Renderer *gSDLRenderer;
-    SDL_Texture *gSDLTexture;
     void (*render_function)();
     void (*user_events)();
     bool gDone;

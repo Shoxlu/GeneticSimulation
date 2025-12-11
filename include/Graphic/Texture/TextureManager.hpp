@@ -12,7 +12,8 @@ public:
     ~TextureManager();
     //Charge une image bmp et la renvoie
     Texture LoadImage(Window& win,const char *path);
-    Texture GetImage(const char *path);
+    Texture GetTexture(const char *path);
+    void FreeTexture(const char *path);
     void DrawSquareOnTexture(SDL_Texture *texture, Vec pos, Vec rect, RGBA color);
     void ClearTexture(SDL_Texture *texture);
     void DrawTexture(Window& win, Vec pos, SDL_Texture *texture);
