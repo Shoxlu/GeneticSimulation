@@ -1,7 +1,8 @@
 #include <Logic/Objects/BaseObject.hpp>
 
 //Constructeur pour BaseObject
-BaseObject::BaseObject(){
+BaseObject::BaseObject():pos(0, 0)
+{
   
 }
 

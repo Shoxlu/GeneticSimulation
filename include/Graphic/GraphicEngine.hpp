@@ -2,16 +2,17 @@
 #include <Graphic/Window/Window.hpp>
 #include <Graphic/Texture/Texture.hpp>
 #include <Graphic/Texture/TextureManager.hpp>
+#include <Logic/Objects/Object.hpp>
 
-
-class GraphicEngine: public Window
+class GraphicEngine: protected Window, protected TextureManager
 {
 private:
-    TextureManager textureManager;
+
 public:
     GraphicEngine(int width, int height);
     ~GraphicEngine();
     void UpdateGraphic();
     void UserRender();
     Texture GetTexture(const char *path);
+    void RenderObjects();
 };

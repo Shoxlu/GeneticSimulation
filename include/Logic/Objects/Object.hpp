@@ -6,11 +6,10 @@
 class Object: public BaseObject
 {
 private:
+public:
     Texture texture;
     Vec vel;
     Vec acc;
-
-public:
     Object();
     Object(Vec pos_initial);
     Object(Vec pos_initial, Vec vel_initial);

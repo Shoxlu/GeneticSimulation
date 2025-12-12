@@ -2,16 +2,16 @@
 #include <Utils/Vec.hpp>
 
 class BaseObject{
-//Accessible par tout
+//Accessible par tous
 public:
     BaseObject();
     BaseObject(Vec pos_initial);
     ~BaseObject();
     void Update();
-
+    Vec pos;
 //Accessible par les héritiers et soi-même
 protected:
-    Vec pos;
+    
 // Accessible par soi-même
 private:
 };

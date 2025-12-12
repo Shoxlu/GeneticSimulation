@@ -5,9 +5,9 @@
 
 class Window{
 public:
-    Window(int height, int width);
-    int InitWindow(int h, int w);
-    void TermintateWindow();
+    Window(int width, int height);
+    int InitWindow(int w, int h);
+    void TerminateWindow();
     void SetTitle(std::string new_title);
     SDL_Renderer *GetRenderer();
     bool WindowClosed();
@@ -23,6 +23,6 @@ private:
     void (*render_function)();
     void (*user_events)();
     bool gDone;
-    int width;
-    int height;
+    int window_width;
+    int window_height;
 };

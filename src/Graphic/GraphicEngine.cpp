@@ -11,14 +11,14 @@ GraphicEngine::GraphicEngine(int width, int height):Window(width, height)
 }
 
 Texture GraphicEngine::GetTexture(const char* path){
-    return textureManager.LoadImage(*this, path);
+    return LoadImage(GetRenderer(), path);
 }
 
 
 void GraphicEngine::UserRender(){
     Texture text = GetTexture("../img/pawn.bmp");
     Vec pos(200, 300);
-    textureManager.DrawTexture(*this, pos, text.data);
+    DrawTexture(GetRenderer(), pos, text.data);
 }
 
 void GraphicEngine::UpdateGraphic(){
@@ -28,9 +28,9 @@ void GraphicEngine::UpdateGraphic(){
         CloseWindow();
     }else{
         SDL_Delay(16);
-        SDL_RenderClear(GetRenderer());
         UserRender();
         SDL_RenderPresent(GetRenderer());
+        SDL_RenderClear(GetRenderer());
     }
 }
 

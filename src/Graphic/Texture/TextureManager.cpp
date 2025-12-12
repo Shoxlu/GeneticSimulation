@@ -23,7 +23,7 @@ Texture TextureManager::GetTexture(const char* path){
     return texture;
 }
 
-Texture TextureManager::LoadImage(Window& win, const char* path){
+Texture TextureManager::LoadImage(SDL_Renderer* rend, const char* path){
     Texture text = GetTexture(path);
     if(text.data){
         //log_printf("La texture existait déjà, elle est réutilisée.\n");
@@ -35,7 +35,7 @@ Texture TextureManager::LoadImage(Window& win, const char* path){
         log_printf("Erreur SDL_LoadBMP: %s\n", SDL_GetError());
     }
     // Convertit en texture pour l’affichage
-    SDL_Renderer *renderer = win.GetRenderer();
+    SDL_Renderer *renderer = rend;
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface); // plus besoin de la surface
     if (!texture) {
@@ -95,27 +95,27 @@ void TextureManager::ClearTexture(SDL_Texture* texture)
     SDL_UnlockTexture(texture);
 }
 
-void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture)
+void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture)
 {
-    DrawTexture(win, pos, texture, nullptr, 1.0, 1.0);
+    DrawTexture(renderer, pos, texture, nullptr, 1.0, 1.0);
 }
 
-void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL_FRect* src)
+void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, SDL_FRect* src)
 {
-    DrawTexture(win, pos, texture, src, 1.0, 1.0);
+    DrawTexture(renderer, pos, texture, src, 1.0, 1.0);
 }
 
-void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
+void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
 {
-    DrawTexture(win, pos, texture, nullptr, x_mult, y_mult);
+    DrawTexture(renderer, pos, texture, nullptr, x_mult, y_mult);
 }
 
-void TextureManager::DrawTexture(Window& win, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
+void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
 {
     float w, h;
     SDL_GetTextureSize(texture, &w, &h);
     SDL_FRect dst = {(float)pos.x, (float)pos.y, w*x_mult, h*y_mult};
-    SDL_RenderTexture(win.GetRenderer(), texture, src, &dst);
+    SDL_RenderTexture(renderer, texture, src, &dst);
 }
 //Obsolete ?
 // void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)

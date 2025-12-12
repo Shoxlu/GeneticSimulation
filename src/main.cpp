@@ -1,5 +1,5 @@
 #include <main.h>
-#include <Core/Engine.hpp>
+#include <Core/Simulation/Simulation.hpp>
 #include <Tests/Tests.hpp>
 #include <assert.h>
 
@@ -7,8 +7,8 @@ void tests();
 
 int main(){
     tests();
-    Engine engine(600, 1000);
-    engine.Start();
-    engine.Terminate();
+    Simulation simu(10, 1, 1000, 600);
+    simu.Start();
+    simu.Terminate();
     return 0;
 }

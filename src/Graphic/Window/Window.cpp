@@ -3,20 +3,20 @@
 #include <Graphic/Window/Window.hpp>
 #include <Utils/Error/error.hpp>
 
-Window::Window(int height, int width){
-    InitWindow(height, width);
+Window::Window(int width, int height){
+    InitWindow(width, height);
 }
 
 //Initialise la fenêtre SDL
-int Window::InitWindow(int height, int width){
+int Window::InitWindow(int width, int height){
     //Initialise SDL pour la video et les events
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
     {
         log_printf("L'initialisation de SDL a échoué, problème de librairie ?\n");
         return -1;
     }
-    this->height = height;
-    this->width = width;
+    this->window_height = height;
+    this->window_width = width;
     //Création de la fenêtre 
     this->gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
     //Création du Renderer (?)
@@ -77,7 +77,7 @@ SDL_Renderer* Window::GetRenderer(){
     return this->gSDLRenderer;
 }
 
-void Window::TermintateWindow(){
+void Window::TerminateWindow(){
     log_printf("Fin de l'appli!\n");
     //Libère toutes les ressources
     SDL_DestroyRenderer(this->gSDLRenderer);

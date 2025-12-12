@@ -1,7 +1,8 @@
 #pragma once
 #include <Graphic/GraphicEngine.hpp>
+#include <Logic/LogicEngine.hpp>
 
-class Engine: public GraphicEngine
+class Engine: public GraphicEngine, public LogicEngine
 {
 private:
     double dt;
@@ -11,6 +12,5 @@ public:
     void Start();
     void Terminate();
     void Main();
-    void UpdateLogic();
 };
 

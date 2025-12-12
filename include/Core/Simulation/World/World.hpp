@@ -7,7 +7,7 @@ class World
 
 public:
     World();
-    World(double width, double height);
+    World(double, double);
     ~World();
 protected:
     // std::vector<Fruit> fruits;

@@ -10,22 +10,11 @@ Engine::~Engine()
 }
 
 void Engine::Start(){
-    Main();
-}
-
-void Engine::UpdateLogic(){
 
 }
 
 void Engine::Main(){
-    while (!WindowClosed())
-    {
-        UpdateLogic();
-
-        UpdateGraphic();
-    }
-    log_printf("Fin de l'appli ?\n");
-    TermintateWindow();
+    
 }
 
 void Engine::Terminate(){

@@ -27,14 +27,16 @@ Object::~Object()
 }
 
 
-void Object::UpdatePos(double dt){
+void Object::UpdatePos(double dt)
+{
     //Méthode d'Euler (pas besoin de précision)
     vel += dt * acc;
     pos += dt * vel;
     acc = Vec(0, 0);
 }
 
-void Object::ClampToEdge(double x_min, double y_min, double x_max, double y_max){
+void Object::ClampToEdge(double x_min, double y_min, double x_max, double y_max)
+{
     pos.x = std::max(x_min, pos.x);
     pos.y = std::max(y_min, pos.y);
     pos.x = std::min(x_max, pos.x);
