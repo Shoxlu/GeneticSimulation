@@ -17,7 +17,9 @@ World(width, height), Engine(width, height), dt(dt)
         Object &obj = objects[i];
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);
-        obj.SetSprite(CreateSprite("../img/pawn.bmp"));
+        Sprite sprite = CreateSprite("../img/pawn.bmp");
+        sprite.CenterAnchor();
+        obj.SetSprite(sprite);
     }
 }
 

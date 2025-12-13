@@ -17,6 +17,11 @@ Sprite::~Sprite()
 {
 }
 
+void Sprite::CenterAnchor()
+{
+    offset_draw = Vec(size.x / 2, size.y / 2);
+}
+
 void Sprite::Draw(Vec& pos)
 {
     GraphicEngine::DrawSprite(pos, *this);

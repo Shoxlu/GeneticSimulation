@@ -10,7 +10,7 @@ public:
     Sprite();
     ~Sprite();
     Sprite(Texture& texture);
-    void Center();
+    void CenterAnchor();
     void Draw(Vec& pos);
     Vec offset_draw;
     Vec offset_texture;
