@@ -2,18 +2,22 @@
 
 Simulation::Simulation():World(0, 0), Engine(0, 0), dt(1)
 {
-
+    Random::Init();
 }
+
+
 Simulation::Simulation(int n_obj, double dt, double width, double height):
 World(width, height), Engine(width, height), dt(dt)
 {
+    Random::Init();
     objects.resize(n_obj);
+    ObjectManager::RandomizeSet(objects, Vec(0, width), Vec(0, height));
     for (size_t i = 0; i < objects.size(); i++)
     {
         Object &obj = objects[i];
-        obj.pos = Vec(30*i, 100);
-        obj.vel = Vec(1, 0.8)/10;
-        obj.texture = GetTexture("../img/pawn.bmp");
+        Vec pos = obj.GetPos();
+        log_printf("%f, %f\n", pos.x, pos.y);
+        obj.SetSprite(CreateSprite("../img/pawn.bmp"));
     }
 }
 
@@ -61,6 +65,6 @@ void Simulation::UpdateObjects()
 void Simulation::DrawObjects()
 {
     for(Object& obj: objects){
-        DrawTexture(GetRenderer(), obj.pos, obj.texture.data);
+        obj.Draw();
     }
 }

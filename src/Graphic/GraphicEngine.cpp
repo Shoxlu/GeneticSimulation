@@ -14,11 +14,15 @@ Texture GraphicEngine::GetTexture(const char* path){
     return LoadImage(GetRenderer(), path);
 }
 
+Sprite GraphicEngine::CreateSprite(const char* path){
+    return SpriteManager::CreateSprite(GetRenderer(), path);
+}
+
 
 void GraphicEngine::UserRender(){
     Texture text = GetTexture("../img/pawn.bmp");
     Vec pos(200, 300);
-    DrawTexture(GetRenderer(), pos, text.data);
+    TextureManager::DrawTexture(GetRenderer(), pos, text.data);
 }
 
 void GraphicEngine::UpdateGraphic(){
@@ -36,4 +40,14 @@ void GraphicEngine::UpdateGraphic(){
 
 GraphicEngine::~GraphicEngine()
 {
+}
+
+void GraphicEngine::DrawSprite(Vec pos, Sprite& sprite)
+{
+    SpriteManager::DrawSprite(Window::GetRenderer(), pos, sprite, 1.0, 1.0);
+}
+
+void GraphicEngine::DrawSprite(Vec pos, Sprite &sprite,  float x_mult, float y_mult)
+{
+    SpriteManager::DrawSprite(Window::GetRenderer(), pos, sprite, x_mult, y_mult);
 }

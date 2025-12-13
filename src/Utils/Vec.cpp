@@ -1,6 +1,7 @@
 #include <Utils/Vec.hpp>
 
 
+
 Vec::Vec():x(0), y(0)
 {
 

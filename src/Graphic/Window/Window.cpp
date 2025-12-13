@@ -3,6 +3,10 @@
 #include <Graphic/Window/Window.hpp>
 #include <Utils/Error/error.hpp>
 
+
+SDL_Window* Window::gSDLWindow = nullptr;
+SDL_Renderer* Window::gSDLRenderer = nullptr;
+
 Window::Window(int width, int height){
     InitWindow(width, height);
 }
@@ -18,12 +22,12 @@ int Window::InitWindow(int width, int height){
     this->window_height = height;
     this->window_width = width;
     //Création de la fenêtre 
-    this->gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
+    Window::gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
     //Création du Renderer (?)
-    this->gSDLRenderer = SDL_CreateRenderer(this->gSDLWindow, NULL);
+    Window::gSDLRenderer = SDL_CreateRenderer(Window::gSDLWindow, NULL);
     this->gDone = false;
-    SDL_SetRenderDrawColor(this->gSDLRenderer, 30, 30, 30, 255);
-    if (!this->gSDLWindow || !this->gSDLRenderer)
+    SDL_SetRenderDrawColor(Window::gSDLRenderer, 30, 30, 30, 255);
+    if (!Window::gSDLWindow || !Window::gSDLRenderer)
     {
         log_printf("Echec de l'initialisation de Window\n");
         return -1;
@@ -74,7 +78,7 @@ void Window::CloseWindow(){
 }
 
 SDL_Renderer* Window::GetRenderer(){
-    return this->gSDLRenderer;
+    return Window::gSDLRenderer;
 }
 
 void Window::TerminateWindow(){

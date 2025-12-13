@@ -16,10 +16,10 @@ public:
     void FreeTexture(const char *path);
     void DrawSquareOnTexture(SDL_Texture *texture, Vec pos, Vec rect, RGBA color);
     void ClearTexture(SDL_Texture *texture);
-    void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture);
-    void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, SDL_FRect *src);
-    void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, float x_mult, float y_mult);
-    void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, SDL_FRect *src, float x_mult, float y_mult);
+    static void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture);
+    static void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, SDL_FRect *src);
+    static void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, float x_mult, float y_mult);
+    static void DrawTexture(SDL_Renderer* rend, Vec pos, SDL_Texture *texture, SDL_FRect *src, float x_mult, float y_mult);
     //void DrawPartTexture(Window& win, SDL_Texture *texture, Vec pos, Vec wh, SDL_FRect *src);
 
 private:

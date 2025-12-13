@@ -1,22 +1,22 @@
 #include <Logic/Objects/Object.hpp>
-
+#include <Graphic/GraphicEngine.hpp>
 
 Object::Object()
 {
 }
 
-Object::Object(Vec pos_initial):
+Object::Object(const Vec& pos_initial):
 BaseObject(pos_initial)
 {
 
 }
-Object::Object(Vec pos_initial, Vec vel_initial):
+Object::Object(const Vec& pos_initial, const Vec& vel_initial):
 BaseObject(pos_initial), vel(vel_initial)
 {
     
 }
 
-Object::Object(Vec pos_initial, Vec vel_initial, Vec acc_initial): 
+Object::Object(const Vec& pos_initial, const Vec& vel_initial, const Vec& acc_initial): 
 BaseObject(pos_initial), vel(vel_initial), acc(acc_initial)
 {
 }
@@ -41,4 +41,33 @@ void Object::ClampToEdge(double x_min, double y_min, double x_max, double y_max)
     pos.y = std::max(y_min, pos.y);
     pos.x = std::min(x_max, pos.x);
     pos.y = std::min(y_max, pos.y);
+}
+
+void Object::SetVel(const Vec& new_vel){
+    vel = new_vel;
+}
+
+void Object::SetAcc(const Vec& new_acc){
+    acc = new_acc;
+}
+
+void Object::SetSprite(const Sprite& new_sprite){
+    sprite = new_sprite;
+}
+
+Vec Object::GetVel(){
+    return vel;
+}
+
+Vec Object::GetAcc(){
+    return acc;
+}
+
+Sprite Object::GetSprite(){
+    return sprite;
+}
+
+
+void Object::Draw(){
+    GraphicEngine::DrawSprite(pos, sprite);
 }

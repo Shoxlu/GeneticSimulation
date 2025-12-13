@@ -9,7 +9,7 @@ public:
     int InitWindow(int w, int h);
     void TerminateWindow();
     void SetTitle(std::string new_title);
-    SDL_Renderer *GetRenderer();
+    static SDL_Renderer *GetRenderer();
     bool WindowClosed();
     void SetUserFunc(void (*render_func)(), void (*user_events)());
     bool ManageEvents();
@@ -18,8 +18,9 @@ public:
 
 private:
     std::string title;
-    SDL_Window *gSDLWindow;
-    SDL_Renderer *gSDLRenderer;
+    //Je ne sais pas s'il y a un meilleur moyen que de rendre ça global (statique ici mais c'est pareil...)
+    static SDL_Window *gSDLWindow;
+    static SDL_Renderer *gSDLRenderer;
     void (*render_function)();
     void (*user_events)();
     bool gDone;

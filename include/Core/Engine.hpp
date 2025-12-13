@@ -7,6 +7,7 @@ class Engine: public GraphicEngine, public LogicEngine
 private:
     double dt;
 public:
+    Engine();
     Engine(int width, int height);
     ~Engine();
     void Start();
