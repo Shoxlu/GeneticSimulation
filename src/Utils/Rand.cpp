@@ -1,4 +1,4 @@
-#include <Utils/rand.hpp>
+#include <Utils/Rand.hpp>
 #include <Utils/Error/error.hpp>
 #include <random>
 #include <assert.h>
