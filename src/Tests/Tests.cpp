@@ -1,6 +1,12 @@
 #include <assert.h>
 #include <Utils/utils.hpp>
 
+void rand_tests(){
+    Random::Init();
+    Random::Tests();
+}
+
+
 void vec_tests(){
     Vec a = Vec(1, 2);
     assert(a == Vec(1, 2));
@@ -25,5 +31,6 @@ void vec_tests(){
 }
 
 void tests(){
+    rand_tests();
     vec_tests();
 }
