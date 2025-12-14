@@ -5,19 +5,20 @@
 #include <Graphic/Sprite/SpriteManager.hpp>
 #include <Logic/Objects/Object.hpp>
 
-class GraphicEngine: protected Window, protected SpriteManager
+class GraphicEngine: protected SpriteManager
 {
 private:
 
+protected:
+   
 public:
-    GraphicEngine(int width, int height);
+    GraphicEngine();
     ~GraphicEngine();
-    void UpdateGraphic();
+    void UpdateWindow(Window& window);
     void UserRender();
-    Texture GetTexture(const char *path);
-    Sprite CreateSprite(const char *path);
-    void RenderObjects();
-    static void DrawSprite(Vec pos, Sprite& sprite);
-    static void DrawSprite(Vec pos, Sprite& sprite, float x_mult, float y_mult);
+    Texture GetTexture(Window& window, const char *path);
+    Sprite CreateSprite(Window& window, const char *path);
+    static void DrawSprite(Window& window, Vec pos, Sprite& sprite);
+    static void DrawSprite(Window& window, Vec pos, Sprite& sprite, float x_mult, float y_mult);
 
 };

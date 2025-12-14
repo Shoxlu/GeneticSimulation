@@ -1,23 +1,24 @@
 #pragma once
-#include <vector>
-#include <Logic/Objects/Object.hpp>
-#include <Logic/Objects/ObjectManager.hpp>
 #include <Core/Simulation/World/World.hpp>
+#include <Logic/Objects/Object.hpp>
 #include <Core/Engine.hpp>
+#include <vector>
 
-class Simulation: protected World, public Engine
+class Simulation: public World
 {
-protected:
-    std::vector<Object> objects;
+private:
     double dt;
+    std::vector<Object> objects;
+    //peut-être que c'est inutile ?
+    Engine& engine;
+    Window &window;
+
 public:
-    Simulation();
-    Simulation(int n_obj, double dt, double width, double height);
+    Simulation(Window& window, const int n_obj,const double width,const double height,const double dt);
     ~Simulation();
-    void Start();
-    void Main();
-    void UpdateSimulation();
-    void DrawSimulation();
     void UpdateObjects();
     void DrawObjects();
+    void UpdateSimulation();
+    void DrawSimulation();
 };
+

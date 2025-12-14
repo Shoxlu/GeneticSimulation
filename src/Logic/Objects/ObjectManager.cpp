@@ -20,6 +20,7 @@ std::vector<Object> ObjectManager::CreateRandomSet(const int n_obj,const Vec& x_
 void ObjectManager::RandomizeSet(std::vector<Object>& objects, const Vec& x_range, const Vec& y_range)
 {
     for(Object& obj:objects){
-        obj.SetPos(Vec(Random::RandFloat(x_range.x, x_range.y), Random::RandFloat(y_range.x, y_range.y)));
+        Vec pos = {Random::RandFloat(x_range.x, x_range.y), Random::RandFloat(y_range.x, y_range.y)};
+        obj.SetPos(pos);
     }
 }

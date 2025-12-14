@@ -23,6 +23,7 @@ public:
     void UpdatePos(double dt);
     void ClampToEdge(double x_min, double y_min, double x_max, double y_max);
     void Draw();
+
     void SetVel(const Vec& new_vel);
     Vec GetVel();
 

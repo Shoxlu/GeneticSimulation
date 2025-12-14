@@ -23,7 +23,7 @@ Texture TextureManager::GetTexture(const char* path){
     return texture;
 }
 
-Texture TextureManager::LoadImage(SDL_Renderer* rend, const char* path){
+Texture TextureManager::LoadImage(Window& window, const char* path){
     Texture text = GetTexture(path);
     if(text.data){
         //log_printf("La texture existait déjà, elle est réutilisée.\n");
@@ -35,13 +35,13 @@ Texture TextureManager::LoadImage(SDL_Renderer* rend, const char* path){
         log_printf("Erreur SDL_LoadBMP: %s\n", SDL_GetError());
     }
     // Convertit en texture pour l’affichage
-    SDL_Renderer *renderer = rend;
+    SDL_Renderer *renderer = window.GetRenderer();
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface); // plus besoin de la surface
     if (!texture) {
         log_printf("Erreur SDL_CreateTextureFromSurface: %s\n", SDL_GetError());
     }
-    textures[path] = Texture(texture);
+    textures[path] = Texture(&window, texture);
     log_printf("La texture %s a été chargée avec succès\n", path);
     return textures[path];
 }
@@ -49,7 +49,6 @@ Texture TextureManager::LoadImage(SDL_Renderer* rend, const char* path){
 
 void TextureManager::DrawSquareOnTexture(SDL_Texture* texture, Vec pos, Vec rect, RGBA color)
 {
-
     char* pix;
     int pitch;
     int w, h;
@@ -76,7 +75,7 @@ void TextureManager::DrawSquareOnTexture(SDL_Texture* texture, Vec pos, Vec rect
     SDL_UnlockTexture(texture);
     
 }
-
+//Untested!
 void TextureManager::ClearTexture(SDL_Texture* texture)
 {
     char* pix;
@@ -84,38 +83,39 @@ void TextureManager::ClearTexture(SDL_Texture* texture)
     float w, h;
     SDL_GetTextureSize(texture, &w, &h);
     SDL_LockTexture(texture, NULL, (void**)&pix, &pitch);
-    for (int i = 0; i < w; i++) 
-    {
-        for (int j = 0; j <h; j++)
-        {
-            RGBA color = {0, 0, 0, 255};
-            ((int*)pix)[i+(int)h*j]= color.rgba.rgba;
-        }
-    }
+    memset(pix, 0xFF, w * h);
+    // for (int i = 0; i < w; i++) 
+    // {
+    //     for (int j = 0; j <h; j++)
+    //     {
+    //         RGBA color = {0, 0, 0, 255};
+    //         ((int*)pix)[i+(int)h*j]= color.rgba.rgba;
+    //     }
+    // }
     SDL_UnlockTexture(texture);
 }
 
-void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture)
+void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture)
 {
-    DrawTexture(renderer, pos, texture, nullptr, 1.0, 1.0);
+    DrawTexture(window, pos, texture, nullptr, 1.0, 1.0);
 }
 
-void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, SDL_FRect* src)
+void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, SDL_FRect* src)
 {
-    DrawTexture(renderer, pos, texture, src, 1.0, 1.0);
+    DrawTexture(window, pos, texture, src, 1.0, 1.0);
 }
 
-void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
+void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
 {
-    DrawTexture(renderer, pos, texture, nullptr, x_mult, y_mult);
+    DrawTexture(window, pos, texture, nullptr, x_mult, y_mult);
 }
 
-void TextureManager::DrawTexture(SDL_Renderer* renderer, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
+void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
 {
     float w, h;
     SDL_GetTextureSize(texture, &w, &h);
     SDL_FRect dst = {(float)pos.x, (float)pos.y, w*x_mult, h*y_mult};
-    SDL_RenderTexture(renderer, texture, src, &dst);
+    SDL_RenderTexture(window.GetRenderer(), texture, src, &dst);
 }
 //Obsolete ?
 // void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)

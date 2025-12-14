@@ -3,11 +3,9 @@
 #include <Graphic/Window/Window.hpp>
 #include <Utils/Error/error.hpp>
 
-
-SDL_Window* Window::gSDLWindow = nullptr;
-SDL_Renderer* Window::gSDLRenderer = nullptr;
-
-Window::Window(int width, int height){
+Window::Window(int width, int height, int framerate_):
+framerate(framerate_), width(width), height(height), gDone(false)
+{
     InitWindow(width, height);
 }
 
@@ -19,15 +17,13 @@ int Window::InitWindow(int width, int height){
         log_printf("L'initialisation de SDL a échoué, problème de librairie ?\n");
         return -1;
     }
-    this->window_height = height;
-    this->window_width = width;
+
     //Création de la fenêtre 
-    Window::gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
+    this->gSDLWindow = SDL_CreateWindow("SDL3 window", width, height, 0);
     //Création du Renderer (?)
-    Window::gSDLRenderer = SDL_CreateRenderer(Window::gSDLWindow, NULL);
-    this->gDone = false;
-    SDL_SetRenderDrawColor(Window::gSDLRenderer, 30, 30, 30, 255);
-    if (!Window::gSDLWindow || !Window::gSDLRenderer)
+    this->gSDLRenderer = SDL_CreateRenderer(this->gSDLWindow, NULL);
+    SDL_SetRenderDrawColor(this->gSDLRenderer, 30, 30, 30, 255);
+    if (!this->gSDLWindow || !this->gSDLRenderer)
     {
         log_printf("Echec de l'initialisation de Window\n");
         return -1;
@@ -73,12 +69,25 @@ bool Window::ManageEvents(){
     return true;
 }
 
+void Window::Update()
+{
+    
+    if (!ManageEvents())
+    {
+        CloseWindow();
+    }else{
+        SDL_Delay(1/(double)framerate*1000);
+        SDL_RenderPresent(GetRenderer());
+        SDL_RenderClear(GetRenderer());
+    }
+}
+
 void Window::CloseWindow(){
     this->gDone = true;
 }
 
 SDL_Renderer* Window::GetRenderer(){
-    return Window::gSDLRenderer;
+    return this->gSDLRenderer;
 }
 
 void Window::TerminateWindow(){

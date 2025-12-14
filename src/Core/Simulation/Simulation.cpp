@@ -1,23 +1,17 @@
 #include <Core/Simulation/Simulation.hpp>
+#include <Logic/Objects/ObjectManager.hpp>
+#include <Core/Engine.hpp>
 
-Simulation::Simulation():World(0, 0), Engine(0, 0), dt(1)
+Simulation::Simulation(Window& window, const int n_obj, const double width,const double height,const double dt):
+World(width, height), dt(dt),objects(n_obj), engine(Engine::Instance()), window(window)
 {
-    Random::Init();
-}
-
-
-Simulation::Simulation(int n_obj, double dt, double width, double height):
-World(width, height), Engine(width, height), dt(dt)
-{
-    Random::Init();
-    objects.resize(n_obj);
     ObjectManager::RandomizeSet(objects, Vec(0, width), Vec(0, height));
     for (size_t i = 0; i < objects.size(); i++)
     {
         Object &obj = objects[i];
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);
-        Sprite sprite = CreateSprite("../img/pawn.bmp");
+        Sprite sprite = engine.CreateSprite(window, "../img/pawn.bmp");
         sprite.CenterAnchor();
         obj.SetSprite(sprite);
     }
@@ -25,26 +19,8 @@ World(width, height), Engine(width, height), dt(dt)
 
 Simulation::~Simulation()
 {
-
-}
-    
-void Simulation::Start()
-{
-    Main();
 }
 
-void Simulation::Main()
-{
-    while (!WindowClosed())
-    {
-        UpdateLogic();
-        UpdateSimulation();
-        DrawSimulation();
-        UpdateGraphic();
-    }
-    log_printf("Fin de l'appli ?\n");
-    TerminateWindow();
-}
 
 void Simulation::UpdateSimulation()
 {

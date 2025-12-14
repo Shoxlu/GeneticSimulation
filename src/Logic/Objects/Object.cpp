@@ -68,6 +68,7 @@ Sprite Object::GetSprite(){
 }
 
 
-void Object::Draw(){
-    GraphicEngine::DrawSprite(pos, sprite);
+void Object::Draw()
+{
+    sprite.Draw(pos);
 }

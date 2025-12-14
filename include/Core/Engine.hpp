@@ -5,10 +5,13 @@
 class Engine: public GraphicEngine, public LogicEngine
 {
 private:
-    double dt;
-public:
     Engine();
-    Engine(int width, int height);
+public:
+    static Engine& Instance(){
+        static Engine instance;
+        log_printf("engine: %p\n", &instance);
+        return instance;
+    }
     ~Engine();
     void Start();
     void Terminate();

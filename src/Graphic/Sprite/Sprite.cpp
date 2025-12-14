@@ -4,6 +4,7 @@
 
 Sprite::Sprite():Texture(), offset_draw(0, 0), offset_texture(0, 0), size(0, 0)
 {
+
 }
 
 Sprite::Sprite(Texture& texture):Texture(texture), offset_draw(0, 0), offset_texture(0, 0)
@@ -19,10 +20,10 @@ Sprite::~Sprite()
 
 void Sprite::CenterAnchor()
 {
-    offset_draw = Vec(size.x / 2, size.y / 2);
+    offset_draw = Vec(-size.x / 2, -size.y / 2);
 }
 
 void Sprite::Draw(Vec& pos)
 {
-    GraphicEngine::DrawSprite(pos, *this);
+    GraphicEngine::DrawSprite(*window, pos, *this);
 }

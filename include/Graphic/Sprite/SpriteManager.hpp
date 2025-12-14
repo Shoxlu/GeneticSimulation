@@ -6,11 +6,13 @@ class SpriteManager : protected TextureManager
 {
 private:
     /* data */
+protected:
+    static void DrawSprite(Window& window, Vec pos, Sprite& sprite, float x_mult, float y_mult);
 public:
     SpriteManager(/* args */);
     ~SpriteManager();
-    Sprite CreateSprite(SDL_Renderer* renderer, const char* texture_name);
-    static void DrawSprite(SDL_Renderer* rend, Vec pos, Sprite& sprite, float x_mult, float y_mult);
+    Sprite CreateSprite(Window& window, const char* texture_name);
+   
 };
 
 

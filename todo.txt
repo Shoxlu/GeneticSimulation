@@ -4,8 +4,8 @@ Code:
 -Donner une structure à l'application
 -Afficher une texture. DONE 
 -Créer les classes "Objects" et ses dérivées.
-
-
+-Revision du code par rapport aux copies d'objets dans les arguments
+-Créer un contexte dédié pour l'application ? Au lieu de tout mettre dans le main.
 
 
 Autres:
