@@ -2,3 +2,4 @@
 #include <Utils/rgba.hpp>
 #include <Utils/Vec.hpp>
 #include <Utils/Rand.hpp>
+#include <Utils/Math.hpp>

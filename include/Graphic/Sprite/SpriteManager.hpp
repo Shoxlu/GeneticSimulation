@@ -7,7 +7,7 @@ class SpriteManager : protected TextureManager
 private:
     /* data */
 protected:
-    static void DrawSprite(Window& window, Vec pos, Sprite& sprite, float x_mult, float y_mult);
+    static void DrawSprite(Window& window, Vec pos, Sprite& sprite);
 public:
     SpriteManager(/* args */);
     ~SpriteManager();

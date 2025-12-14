@@ -16,16 +16,35 @@ BaseObject(pos_initial), vel(vel_initial)
     
 }
 
-Object::Object(const Vec& pos_initial, const Vec& vel_initial, const Vec& acc_initial): 
-BaseObject(pos_initial), vel(vel_initial), acc(acc_initial)
-{
-}
-
 
 Object::~Object()
 {
 }
 
+void Object::UpdateAngle(double dt)
+{
+    if(angle_locked)
+    {
+        SetAngle(atan2(vel.y, vel.x));
+    }else{
+        SetAngle(angle + angle_vel * dt);
+    }
+}
+
+void Object::LockAngle(){
+    angle_locked = true;
+}
+
+void Object::UnlockAngle(){
+    angle_locked = false;
+}
+
+
+void Object::Update(double dt)
+{
+    UpdatePos(dt);
+    UpdateAngle(dt);
+}
 
 void Object::UpdatePos(double dt)
 {
@@ -67,6 +86,22 @@ Sprite Object::GetSprite(){
     return sprite;
 }
 
+void Object::SetAngleVel(double new_angle_vel){
+    angle_vel = new_angle_vel;
+}
+
+double Object::GetAngleVel(){
+    return angle_vel;
+}
+
+void Object::SetAngle(double new_angle){
+    angle = normalize_angle(new_angle);
+    sprite.SetAngle(deg(angle));
+}
+
+double Object::GetAngle(){
+    return angle;
+}
 
 void Object::Draw()
 {

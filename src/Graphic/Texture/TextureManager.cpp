@@ -97,26 +97,34 @@ void TextureManager::ClearTexture(SDL_Texture* texture)
 
 void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture)
 {
-    DrawTexture(window, pos, texture, nullptr, 1.0, 1.0);
+    float w, h;
+    SDL_GetTextureSize(texture, &w, &h);
+    SDL_FRect dst = {(float)pos.x, (float)pos.y, w, h};
+    DrawTexture(window, texture, nullptr, &dst);
 }
 
 void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, SDL_FRect* src)
 {
-    DrawTexture(window, pos, texture, src, 1.0, 1.0);
+    SDL_FRect dst = {(float)pos.x, (float)pos.y, src->w, src->h};
+    DrawTexture(window, texture, src, &dst);
 }
 
-void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, float x_mult, float y_mult)
+void TextureManager::DrawTexture(Window& window, SDL_Texture* texture, SDL_FRect* src,SDL_FRect* dest)
 {
-    DrawTexture(window, pos, texture, nullptr, x_mult, y_mult);
+    SDL_RenderTexture(window.GetRenderer(), texture, src, dest);
 }
 
-void TextureManager::DrawTexture(Window& window, Vec pos, SDL_Texture* texture, SDL_FRect* src, float x_mult, float y_mult)
+void TextureManager::DrawTexture(
+    Window& window,
+    SDL_Texture* texture,
+    SDL_FRect* src,
+    SDL_FRect* dest,
+    double angle
+   )
 {
-    float w, h;
-    SDL_GetTextureSize(texture, &w, &h);
-    SDL_FRect dst = {(float)pos.x, (float)pos.y, w*x_mult, h*y_mult};
-    SDL_RenderTexture(window.GetRenderer(), texture, src, &dst);
+    SDL_RenderTextureRotated(window.GetRenderer(), texture, src, dest, angle, nullptr, SDL_FLIP_NONE);
 }
+
 //Obsolete ?
 // void TextureManager::DrawPartTexture(Window& win,SDL_Texture* texture, Vec pos, Vec wh, SDL_FRect* src)
 // {

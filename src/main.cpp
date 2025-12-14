@@ -3,17 +3,17 @@
 #include <Tests/Tests.hpp>
 #include <assert.h>
 
-void tests();
 
 int main(){
     tests();
+    
+    Engine &engine = Engine::Instance();
+    SimulationManager simu;
     Window mainWindow(1000, 600, 60);
     mainWindow.SetUserFunc(nullptr,nullptr);
     mainWindow.SetTitle("Genetic Simulation");
-    log_printf("Fin de l'init.\n");  
-    Engine &engine = Engine::Instance();
-    SimulationManager simu;
     simu.CreateSimulation(mainWindow, 10, mainWindow.width, mainWindow.height, 1.0);
+    log_printf("Fin de l'init.\n");  
     while (!mainWindow.WindowClosed())
     {
         engine.UpdateLogic();

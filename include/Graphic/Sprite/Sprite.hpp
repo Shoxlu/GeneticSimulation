@@ -6,16 +6,24 @@
 class Sprite: public Texture
 {
 private:
-    void SetOffset(const Vec& );
+    
 public:
     Sprite();
     Sprite(Texture& texture);
     ~Sprite();
     void CenterAnchor();
+    void TopLeftAnchor();
+    void SetAnchor(const Vec& new_offset);
+    void SetAnchor(double x, double y);
+    void SetAngle(double angle);
+    void SetSrcSize(double w, double h);
+    void SetDstSize(double w, double h);
     void Draw(Vec& pos);
 
     Vec offset_draw;
     Vec offset_texture;
-    Vec size;
+    Vec src_size;
+    Vec dst_size;
+    double angle;
 };
 

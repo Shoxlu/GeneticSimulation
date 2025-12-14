@@ -19,8 +19,8 @@ public:
 protected:
     static void DrawTexture(Window& window, Vec pos, SDL_Texture *texture);
     static void DrawTexture(Window& window, Vec pos, SDL_Texture *texture, SDL_FRect *src);
-    static void DrawTexture(Window& window, Vec pos, SDL_Texture *texture, float x_mult, float y_mult);
-    static void DrawTexture(Window& window, Vec pos, SDL_Texture *texture, SDL_FRect *src, float x_mult, float y_mult);
+    static void DrawTexture(Window& window, SDL_Texture *texture, SDL_FRect *src, SDL_FRect* dest);
+    static void DrawTexture(Window& window, SDL_Texture *texture, SDL_FRect *src, SDL_FRect* dst, double angle);
     //void DrawPartTexture(Window& win, SDL_Texture *texture, Vec pos, Vec wh, SDL_FRect *src);
 
 private:
