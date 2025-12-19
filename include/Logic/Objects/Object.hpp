@@ -29,7 +29,7 @@ public:
     void UnlockAngle();
 
     void Draw();
-
+    
     void SetVel(const Vec& new_vel);
     Vec GetVel();
 

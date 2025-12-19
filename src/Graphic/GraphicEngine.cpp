@@ -18,9 +18,7 @@ Sprite GraphicEngine::CreateSprite(Window& window, const char* path){
 
 
 void GraphicEngine::UserRender(){
-    // Texture text = GetTexture("../img/pawn.bmp");
-    // Vec pos(200, 300);
-    // TextureManager::DrawTexture(GetRenderer(), pos, text.data);
+    CallDrawFuncs();
 }
 
 

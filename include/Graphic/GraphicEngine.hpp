@@ -4,8 +4,9 @@
 #include <Graphic/Texture/TextureManager.hpp>
 #include <Graphic/Sprite/SpriteManager.hpp>
 #include <Logic/Objects/Object.hpp>
+#include <Utils/DrawFunc/DrawFuncManager.hpp>
 
-class GraphicEngine: protected SpriteManager
+class GraphicEngine: public DrawFuncManager, protected SpriteManager
 {
 private:
 

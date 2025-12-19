@@ -5,8 +5,9 @@ Code:
 -Afficher une texture. DONE 
 -Créer les classes "Objects" et ses dérivées.
 -Revision du code par rapport aux copies d'objets dans les arguments
--Créer un contexte dédié pour l'application ? Au lieu de tout mettre dans le main.
-
+-Créer un contexte dédié pour l'application ? Au lieu de tout mettre dans le main. DONE
+-IMPLEMENTER UN TAS ET UNE FILE DE PRIORITE (pour DrawFuncManager et UpdateFuncManager)
+--Implementer le système de priorite pour les deux exécutions correspondantes
 
 Autres:
 -Gérer les problèmes de SDL3.dll n'étant pas dans le bon dossier

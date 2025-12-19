@@ -21,7 +21,8 @@ void Application::Run()
     {
         engine.UpdateLogic();
         simManager.UpdateSimulations();
-        simManager.DrawSimulations();
+        //simManager.DrawSimulations();
+        engine.UserRender();
         engine.UpdateWindow(mainWindow);
     }
     log_printf("Fin de l'appli ?\n");
