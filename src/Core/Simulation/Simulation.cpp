@@ -15,12 +15,7 @@ World(width, height), dt(dt),objects(n_obj), engine(Engine::Instance()), window(
         sprite.CenterAnchor();
         obj.SetSprite(sprite);
         obj.LockAngle();
-        engine.AddDrawFunc(
-            DrawFunc::GetDrawFuncFromMethod<Object>(
-                obj,
-                Object::Draw
-            )
-            , 0);
+        ObjectManager::AddToDrawQueue(obj);
 
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);

@@ -27,7 +27,6 @@ public:
     //Bloque l'angle pour suivre la direction de l'object
     void LockAngle();
     void UnlockAngle();
-
     void Draw();
     
     void SetVel(const Vec& new_vel);

@@ -107,3 +107,4 @@ void Object::Draw()
 {
     sprite.Draw(pos);
 }
+

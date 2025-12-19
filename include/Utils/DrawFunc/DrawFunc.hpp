@@ -12,11 +12,10 @@ public:
     DrawFunc(std::function<void()> f, int priority, int id);
     ~DrawFunc();
     template <class T>
-    static DrawFunc GetDrawFuncFromMethod(T& obj, void (T::*f)())
+    static std::function<void()> GetDrawFuncFromMethod(T& obj, void (T::*f)())
     {
-        return DrawFunc(
-                [&obj, f]()
-                { (obj.*f)(); }, 0, 0);
+        return [&obj, f]()
+        { (obj.*f)(); };
     };
     void operator()();
 };
