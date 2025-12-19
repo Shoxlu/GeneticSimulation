@@ -22,6 +22,7 @@ World(width, height), dt(dt),objects(n_obj), engine(Engine::Instance()), window(
 
 Simulation::~Simulation()
 {
+    
 }
 
 
