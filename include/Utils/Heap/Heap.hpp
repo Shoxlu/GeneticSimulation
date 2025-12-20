@@ -4,7 +4,7 @@
 template<typename T>
 class HeapMin
 {
-private:
+protected:
     std::vector<T> data;
     size_t Right(size_t i)
     {
@@ -90,31 +90,62 @@ template<typename T>
 class OrderedPair
 {
 private:
-    T value;
-    int rank;
-
 public:
-    OrderedPair(const T& value, int rank): value(value), rank(rank)
+    T value;
+    int key;
+    OrderedPair(const T& value, int key): value(value), key(key)
     {
 
     }
     bool operator==(const OrderedPair<T>& other){
-        return other.rank == rank;
+        return other.key == key;
     }
     bool operator!=(const OrderedPair<T>& other){
-        return other.rank != rank;
+        return other.key != key;
     }
     bool operator>(const OrderedPair<T>& other){
-        return rank > other.rank;
+        return key > other.key;
     }
     bool operator>=(const OrderedPair<T>& other){
-        return rank >= other.rank;
+        return key >= other.key;
     }
     bool operator<(const OrderedPair<T>& other){
-        return rank < other.rank;
+        return key < other.key;
     }
     bool operator<=(const OrderedPair<T>& other){
-        return rank <= other.rank;
+        return key <= other.key;
     }
 };
 
+template<typename T>
+class PriorityQueue: public HeapMin<OrderedPair<T>>
+{
+public:
+    void Push(T elm, int key)
+    {
+        HeapMin<OrderedPair<T>>::Push(OrderedPair<T>(elm, key));
+    }
+    void ChangeRank(T elm, int key)
+    {
+        for (size_t i = 0; i < this->data.size(); i++)
+        {
+            OrderedPair<T> &p = this->data[i];
+            if(p.value != elm)
+            {
+                continue;
+            }
+            ChangeRankByIndex(i, key);
+        }
+    }
+    void ChangeRankByIndex(size_t i, int key)
+    {
+        OrderedPair<T> &p = this->data[i];
+        if(p.key < key){
+            p.key = key;
+            HeapMin<OrderedPair<T>>::PercolateDown(i);
+        }else{
+            p.key = key;
+            HeapMin<OrderedPair<T>>::PercolateUp(i);
+        } 
+    }
+};

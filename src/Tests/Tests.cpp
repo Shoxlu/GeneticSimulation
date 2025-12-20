@@ -1,6 +1,6 @@
 #include <assert.h>
 #include <Utils/utils.hpp>
-
+#include <Utils/Heap/Heap.hpp>
 void rand_tests(){
     Random::Init();
     Random::Tests();
@@ -10,6 +10,14 @@ void PrintHeap(HeapMin<int> h){
     std::vector<int> data = h.GetRawData();
     for(int& i : data){
         log_printf("%d, ", i);
+    }
+    log_printf("\n");
+}
+
+void PrintQueue(PriorityQueue<float> h){
+    std::vector<OrderedPair<float>> data = h.GetRawData();
+    for(OrderedPair<float>& i : data){
+        log_printf("%f %d, ", i.value, i.key);
     }
     log_printf("\n");
 }
@@ -43,6 +51,23 @@ void heap_test()
         log_printf("%d, ", elm);
     }
     log_printf("\nEnd of heap tests\n");
+    PriorityQueue<float> q;
+    q.Push(2.3, 0);
+    q.Push(1.3, 2);
+    q.Push(2.9, 1);
+    q.Push(3.7, 3);
+    q.Push(1.2, 1);
+    PrintQueue(q);
+    q.ChangeRank(2.3, 10);
+    PrintQueue(q);
+    log_printf("Deconstruction of PrioQueue:\n");
+    OrderedPair<float> elm1(0.0, 0);
+    while (!q.IsEmpty())
+    {
+        elm1 = q.Pop();
+        log_printf("%f %d, ", elm1.value, elm1.key);
+    }
+    log_printf("\nEnd of PrioQueue tests\n");
 }
 
 void vec_tests(){
