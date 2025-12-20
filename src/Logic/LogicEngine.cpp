@@ -10,5 +10,5 @@ LogicEngine::~LogicEngine()
 }
 
 void LogicEngine::UpdateLogic(){
-
+    CallUpdateFuncs();
 }

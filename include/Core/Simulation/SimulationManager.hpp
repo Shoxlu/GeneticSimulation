@@ -16,5 +16,4 @@ public:
     void CreateSimulation(Window& window, int n_obj, double width, double height, double dt);
     void Update();
     void UpdateSimulations();
-    void DrawSimulations();
 };

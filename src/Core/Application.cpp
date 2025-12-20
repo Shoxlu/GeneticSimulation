@@ -16,12 +16,13 @@ void Application::Run()
     mainWindow.SetUserFunc(nullptr,nullptr);
     mainWindow.SetTitle("Genetic Simulation");
     simManager.CreateSimulation(mainWindow, 10, mainWindow.width, mainWindow.height, 1.0);
-    log_printf("Fin de l'init.\n");  
+    log_printf("Fin de l'init.\n");
+    engine.AddUpdateFunc(
+        UpdateFunc::GetUpdateFuncFromMethod<SimulationManager>(simManager, SimulationManager::Update),
+        0);
     while (!mainWindow.WindowClosed())
     {
         engine.UpdateLogic();
-        simManager.UpdateSimulations();
-        //simManager.DrawSimulations();
         engine.UserRender();
         engine.UpdateWindow(mainWindow);
     }

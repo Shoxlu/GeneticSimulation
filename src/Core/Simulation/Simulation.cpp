@@ -6,6 +6,7 @@ Simulation::Simulation(Window& window, const int n_obj, const double width,const
 World(width, height), dt(dt),objects(n_obj), engine(Engine::Instance()), window(window)
 {
     ObjectManager::RandomizeSet(objects, Vec(0, width), Vec(0, height));
+    //C'est du code test.
     for (size_t i = 0; i < objects.size(); i++)
     {
         Object &obj = objects[i];
@@ -33,22 +34,10 @@ void Simulation::UpdateSimulation()
     UpdateObjects();
 }
 
-void Simulation::DrawSimulation()
-{
-    DrawObjects();
-}
-
 void Simulation::UpdateObjects()
 {
     for(Object& obj: objects){
         obj.Update(dt);
         obj.ClampToEdge(0, 0, width, height);
-    }
-}
-
-void Simulation::DrawObjects()
-{
-    for(Object& obj: objects){
-        obj.Draw();
     }
 }

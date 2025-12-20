@@ -17,8 +17,6 @@ public:
     Simulation(Window& window, const int n_obj,const double width,const double height,const double dt);
     ~Simulation();
     void UpdateObjects();
-    void DrawObjects();
     void UpdateSimulation();
-    void DrawSimulation();
 };
 
