@@ -1,5 +1,6 @@
 #pragma once
 #include <Utils/DrawFunc/DrawFunc.hpp>
+#include <Utils/Heap/Heap.hpp>
 #include <vector>
 #include <functional>
 
@@ -9,7 +10,7 @@ class DrawFuncManager
 {
 private:
     
-    std::vector<DrawFunc> funcs;
+    PriorityQueue<DrawFunc> funcs;
 
 public:
     DrawFuncManager();

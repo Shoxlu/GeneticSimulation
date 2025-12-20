@@ -1,7 +1,7 @@
 #include <Core/Application.hpp>
 
 
-Application::Application(/* args */):
+Application::Application():
 engine(Engine::Instance())
 {
 }

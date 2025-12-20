@@ -12,16 +12,22 @@ DrawFuncManager::~DrawFuncManager()
 
 void DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
 {
-    funcs.emplace_back(func, priority, funcs.size());
+    DrawFunc f(func, 0);
+    size_t id = funcs.Push(f, priority);
+    funcs.GetRawData()[id].value.id = id;
 }
 void DrawFuncManager::DeleteDrawFunc(int id)
 {
-    funcs.erase(funcs.begin() + id);
+    funcs.DeleteNodeByIndex(id);
 }
 
 void DrawFuncManager::CallDrawFuncs()
 {
-    for(DrawFunc& func: funcs){
-        func();
+    OrderedPair<DrawFunc> p;
+    PriorityQueue<DrawFunc> copy_funcs = funcs;
+    while(!copy_funcs.IsEmpty())
+    {
+        p = copy_funcs.Pop();
+        p.value();
     }
 }

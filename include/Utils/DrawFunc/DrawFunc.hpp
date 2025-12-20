@@ -5,11 +5,11 @@ class DrawFunc
 {
 private:
     std::function<void()> func;
-    int id;
 public:
     bool to_execute = true;
-    int priority;
-    DrawFunc(std::function<void()> f, int priority, int id);
+    int id;
+    DrawFunc(std::function<void()> f, int id);
+    DrawFunc();
     ~DrawFunc();
     template <class T>
     static std::function<void()> GetDrawFuncFromMethod(T& obj, void (T::*f)())

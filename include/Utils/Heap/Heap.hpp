@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <cstdint>
+#include <cassert>
 
 template<typename T>
 class HeapMin
@@ -18,7 +20,7 @@ protected:
     {
         return (i - 1) / 2;
     }
-    void PercolateDown(size_t i){
+    size_t PercolateDown(size_t i){
         size_t r_child = Right(i);
         size_t l_child = Left(i);
         size_t min = i;
@@ -36,8 +38,9 @@ protected:
             data[i] = temp;
             PercolateDown(min);
         }
+        return i;
     }
-    void PercolateUp(size_t i){
+    size_t PercolateUp(size_t i){
         size_t father = Father(i);
         while(i > 0 && data[i] < data[father]){
             T temp = data[father];
@@ -46,6 +49,7 @@ protected:
             i = father;
             father = Father(i);
         }
+        return i;
     }
 public:
     HeapMin()
@@ -55,10 +59,10 @@ public:
     {
         data.reserve(size);
     }
-    void Push(T elm)
+    size_t Push(T elm)
     {
         data.emplace_back(elm);
-        PercolateUp(data.size() - 1);
+        return PercolateUp(data.size() - 1);
     }
     T& Top(){
         return data[0];
@@ -84,6 +88,9 @@ public:
     std::vector<T> &GetRawData(){
         return data;
     }
+    size_t size(){
+        return data.size();
+    }
 };
 
 template<typename T>
@@ -93,6 +100,10 @@ private:
 public:
     T value;
     int key;
+    OrderedPair(): key(0)
+    {
+
+    }
     OrderedPair(const T& value, int key): value(value), key(key)
     {
 
@@ -121,11 +132,11 @@ template<typename T>
 class PriorityQueue: public HeapMin<OrderedPair<T>>
 {
 public:
-    void Push(T elm, int key)
+    size_t Push(T elm, int key)
     {
-        HeapMin<OrderedPair<T>>::Push(OrderedPair<T>(elm, key));
+        return HeapMin<OrderedPair<T>>::Push(OrderedPair<T>(elm, key));
     }
-    void ChangeRank(T elm, int key)
+    size_t ChangeKey(T elm, int key)
     {
         for (size_t i = 0; i < this->data.size(); i++)
         {
@@ -134,18 +145,36 @@ public:
             {
                 continue;
             }
-            ChangeRankByIndex(i, key);
+            return ChangeKeyByIndex(i, key);
         }
+        return -1;
     }
-    void ChangeRankByIndex(size_t i, int key)
+    size_t ChangeKeyByIndex(size_t i, int key)
     {
         OrderedPair<T> &p = this->data[i];
         if(p.key < key){
             p.key = key;
-            HeapMin<OrderedPair<T>>::PercolateDown(i);
+            return HeapMin<OrderedPair<T>>::PercolateDown(i);
         }else{
             p.key = key;
-            HeapMin<OrderedPair<T>>::PercolateUp(i);
+            return HeapMin<OrderedPair<T>>::PercolateUp(i);
         } 
+    }
+    void DeleteNode(T elm)
+    {
+        for (size_t i = 0; i < this->data.size(); i++)
+        {
+            OrderedPair<T> &p = this->data[i];
+            if(p.value != elm)
+            {
+                continue;
+            }
+            DeleteNodeByIndex(i);
+        }
+    }
+    void DeleteNodeByIndex(size_t id)
+    {
+        ChangeKeyByIndex(id, INT32_MAX);
+        this->data.pop_back();
     }
 };

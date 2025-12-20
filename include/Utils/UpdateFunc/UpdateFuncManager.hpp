@@ -1,12 +1,13 @@
 #pragma once
 #include <Utils/UpdateFunc/UpdateFunc.hpp>
+#include <Utils/Heap/Heap.hpp>
 #include <vector>
 #include <functional>
 class UpdateFuncManager
 {
 private:
     
-    std::vector<UpdateFunc> funcs;
+    PriorityQueue<UpdateFunc> funcs;
 
 public:
     UpdateFuncManager();

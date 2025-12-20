@@ -5,11 +5,12 @@ class UpdateFunc
 {
 private:
     std::function<void()> func;
-    int id;
+
 public:
     bool to_execute = true;
-    int priority;
-    UpdateFunc(std::function<void()> f, int priority, int id);
+    int id;
+    UpdateFunc();
+    UpdateFunc(std::function<void()> f, int id);
     ~UpdateFunc();
     template <class T>
     static std::function<void()> GetUpdateFuncFromMethod(T& obj, void (T::*f)())

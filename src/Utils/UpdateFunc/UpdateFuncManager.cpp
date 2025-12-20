@@ -12,16 +12,22 @@ UpdateFuncManager::~UpdateFuncManager()
 
 void UpdateFuncManager::AddUpdateFunc(std::function<void()> func, int priority)
 {
-    funcs.emplace_back(func, priority, funcs.size());
+    UpdateFunc f(func, 0);
+    size_t id = funcs.Push(f, priority);
+    funcs.GetRawData()[id].value.id = id;
 }
 void UpdateFuncManager::DeleteUpdateFunc(int id)
 {
-    funcs.erase(funcs.begin() + id);
+    funcs.DeleteNodeByIndex(id);
 }
 
 void UpdateFuncManager::CallUpdateFuncs()
 {
-    for(UpdateFunc& func: funcs){
-        func();
+    OrderedPair<UpdateFunc> p;
+    PriorityQueue<UpdateFunc> copy_funcs = funcs;
+    while(!copy_funcs.IsEmpty())
+    {
+        p = copy_funcs.Pop();
+        p.value();
     }
 }
