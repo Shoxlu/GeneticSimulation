@@ -6,6 +6,44 @@ void rand_tests(){
     Random::Tests();
 }
 
+void PrintHeap(HeapMin<int> h){
+    std::vector<int> data = h.GetRawData();
+    for(int& i : data){
+        log_printf("%d, ", i);
+    }
+    log_printf("\n");
+}
+
+void heap_test()
+{
+    
+    HeapMin<int> h;
+    h.Push(3);
+    PrintHeap(h);
+    h.Push(10);
+    PrintHeap(h);
+    h.Push(2);
+    PrintHeap(h);
+    h.Push(8);
+    PrintHeap(h);
+    h.Push(1);
+    PrintHeap(h);
+    h.Push(120);
+    PrintHeap(h);
+    h.Push(30);
+    h.Push(13);
+    h.Push(4);
+    h.Push(6);
+    PrintHeap(h);
+    log_printf("Deconstruction of Heap:\n");
+    int elm = 0;
+    while (!h.IsEmpty())
+    {
+        elm = h.Pop();
+        log_printf("%d, ", elm);
+    }
+    log_printf("\nEnd of heap tests\n");
+}
 
 void vec_tests(){
     Vec a = Vec(1, 2);
@@ -33,4 +71,5 @@ void vec_tests(){
 void tests(){
     rand_tests();
     vec_tests();
+    heap_test();
 }
