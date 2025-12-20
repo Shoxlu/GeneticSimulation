@@ -7,5 +7,5 @@
 int main(){
     tests();
     Application app;
-    //app.Run();
+    app.Run();
 }
