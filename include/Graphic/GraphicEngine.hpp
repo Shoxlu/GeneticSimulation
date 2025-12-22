@@ -21,5 +21,13 @@ public:
     Sprite CreateSprite(Window& window, const char *path);
     static void DrawSprite(Window& window, Vec pos, Sprite& sprite);
     static void DrawSprite(Window& window, Vec pos, Sprite& sprite, float x_mult, float y_mult);
-
+    template<typename T>
+    void AddToDrawQueue(T& obj)
+    {
+        AddDrawFunc(
+            DrawFunc::GetDrawFuncFromMethod<T>(
+                obj,
+                T::Draw
+            ), 0);
+    }
 };

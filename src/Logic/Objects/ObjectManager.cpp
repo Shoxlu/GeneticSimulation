@@ -1,5 +1,4 @@
 #include <Logic/Objects/ObjectManager.hpp>
-#include <Core/Engine.hpp>
 #include <Utils/DrawFunc/DrawFunc.hpp>
 
 ObjectManager::ObjectManager()
@@ -26,13 +25,3 @@ void ObjectManager::RandomizeSet(std::vector<Object>& objects, const Vec& x_rang
     }
 }
 
-
-void ObjectManager::AddToDrawQueue(Object& obj)
-{
-    Engine &engine = Engine::Instance();
-    engine.AddDrawFunc(
-        DrawFunc::GetDrawFuncFromMethod<Object>(
-            obj,
-            Object::Draw
-        ), 0);
-}

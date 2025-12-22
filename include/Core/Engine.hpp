@@ -18,3 +18,12 @@ public:
     void Main();
 };
 
+template<typename T>
+void AddToDrawQueue(T& obj)
+{
+    Engine::Instance().AddDrawFunc(
+        DrawFunc::GetDrawFuncFromMethod<T>(
+            obj,
+            T::Draw
+        ), 0);
+}

@@ -3,12 +3,15 @@
 
 Fruit::Fruit()
 {
+    
 }
 
 Fruit::Fruit(const Vec& pos) : Object(pos)
 {
+
 }
 
 Fruit::~Fruit()
 {
+
 }
