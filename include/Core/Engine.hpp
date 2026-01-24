@@ -9,7 +9,7 @@ private:
 public:
     static Engine& Instance(){
         static Engine instance;
-        log_printf("engine: %p\n", &instance);
+        //log_printf("engine: %p\n", &instance);
         return instance;
     }
     ~Engine();

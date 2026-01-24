@@ -15,5 +15,6 @@ public:
     Simulation(Window& window, const size_t n_obj,const double width,const double height,const double dt);
     ~Simulation();
     void UpdateSimulation();
+    void DoCollisionsFruitAgent();
 };
 

@@ -1,13 +1,14 @@
 #pragma once
 #include <Utils/utils.hpp>
+#include <Logic/Objects/CollideObject/CollideObject.hpp>
 
 class CollisionManager
 {
 private:
     /* data */
 public:
-    static bool CollideRectToRect(Rect rec1, Rect rec2);
-    static bool CollideCircleToCircle(Vec center1, double radius1, Vec center2, double radius2);
-
+    static bool CollideRectToRect(RectBox rec1, RectBox rec2);
+    static bool CollideCircleToCircle(CircleBox, CircleBox);
+    
 };
 

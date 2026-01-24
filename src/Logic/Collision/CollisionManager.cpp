@@ -1,15 +1,18 @@
 #include <Logic/Collision/CollisionManager.hpp>
 
 
-bool CollisionManager::CollideRectToRect(Rect rec1, Rect rec2)
+
+bool CollisionManager::CollideRectToRect(RectBox rec1, RectBox rec2)
 {
-    return (rec1.pos.x < rec2.pos.x + rec2.size.x &&
-        rec1.pos.x + rec1.size.x > rec2.pos.x &&
-        rec1.pos.y < rec2.pos.y + rec2.size.y &&
-        rec1.pos.y + rec1.size.y> rec2.pos.y);
+    Vec pos1 = rec1.GetPos();
+    Vec pos2 = rec2.GetPos();
+    return (pos1.x < pos2.x + rec2.size.x &&
+        pos1.x + rec1.size.x > pos2.x &&
+        pos1.y < pos2.y + rec2.size.y &&
+        pos1.y + rec1.size.y> pos2.y);
 }
-bool CollisionManager::CollideCircleToCircle(Vec center1, double radius1, Vec center2, double radius2)
+bool CollisionManager::CollideCircleToCircle(CircleBox c1, CircleBox c2)
 {
-    double limit_distance = radius1 + radius2;
-    return dist_sq(center1, center2) < (limit_distance * limit_distance);
+    double limit_distance = c1.radius + c2.radius;
+    return dist_sq(c1.GetPos(), c2.GetPos()) < (limit_distance * limit_distance);
 }

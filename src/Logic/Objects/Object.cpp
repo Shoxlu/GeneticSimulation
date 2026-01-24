@@ -1,17 +1,17 @@
 #include <Logic/Objects/Object.hpp>
 #include <Graphic/GraphicEngine.hpp>
 
-Object::Object()
+Object::Object():hitbox(nullptr)
 {
 }
 
 Object::Object(const Vec& pos_initial):
-BaseObject(pos_initial)
+BaseObject(pos_initial),hitbox(nullptr)
 {
 
 }
 Object::Object(const Vec& pos_initial, const Vec& vel_initial):
-BaseObject(pos_initial), vel(vel_initial)
+BaseObject(pos_initial), vel(vel_initial),hitbox(nullptr)
 {
     
 }
@@ -19,6 +19,9 @@ BaseObject(pos_initial), vel(vel_initial)
 
 Object::~Object()
 {
+    printf("Delete Object\n");
+    // if(hitbox) Memory leak
+    //     delete hitbox;
 }
 
 void Object::UpdateAngle(double dt)
@@ -44,6 +47,16 @@ void Object::Update(double dt)
 {
     UpdatePos(dt);
     UpdateAngle(dt);
+    UpdateHitbox();
+}
+
+void Object::UpdateHitbox()
+{
+    if(hitbox)
+    {
+        hitbox->SetPos(pos);
+        // hitbox->SetAngle(angle);
+    }
 }
 
 void Object::UpdatePos(double dt)
@@ -101,6 +114,16 @@ void Object::SetAngle(double new_angle){
 
 double Object::GetAngle(){
     return angle;
+}
+
+void Object::SetHitbox(CollideObject* c)
+{
+    hitbox = c;
+}
+
+CollideObject* Object::GetHitbox()
+{
+    return hitbox;
 }
 
 void Object::Draw()

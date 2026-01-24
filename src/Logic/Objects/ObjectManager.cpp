@@ -25,3 +25,22 @@ void ObjectManager::RandomizeSet(std::vector<Object>& objects, const Vec& x_rang
     }
 }
 
+void ObjectManager::SetObjSprite(Object& obj, Window& win, std::string path)
+{
+    Sprite sprite = Engine::Instance().CreateSprite(win, path.data());
+    sprite.CenterAnchor();
+    obj.SetSprite(sprite);
+    obj.LockAngle();
+}
+
+void ObjectManager::SetCircleBox(Object& obj, float radius)
+{
+    CircleBox *c = new CircleBox(obj.GetPos(), radius);
+    obj.SetHitbox(c);
+}
+
+void ObjectManager::SetRectBox(Object& obj, Vec& size)
+{
+    RectBox *r = new RectBox(Rect(obj.GetPos(), size));
+    obj.SetHitbox(r);
+}
