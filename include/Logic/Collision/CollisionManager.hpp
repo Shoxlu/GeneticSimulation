@@ -7,8 +7,8 @@ class CollisionManager
 private:
     /* data */
 public:
-    static bool CollideRectToRect(RectBox rec1, RectBox rec2);
-    static bool CollideCircleToCircle(CircleBox, CircleBox);
+    static bool CollideRectToRect(const RectHitbox& rec1, const RectHitbox& rec2);
+    static bool CollideCircleToCircle(const CircleHitbox&, const CircleHitbox&);
     
 };
 

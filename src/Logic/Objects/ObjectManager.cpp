@@ -35,12 +35,12 @@ void ObjectManager::SetObjSprite(Object& obj, Window& win, std::string path)
 
 void ObjectManager::SetCircleBox(Object& obj, float radius)
 {
-    CircleBox *c = new CircleBox(obj.GetPos(), radius);
+    CircleHitbox *c = new CircleHitbox(obj.GetPos(), radius);
     obj.SetHitbox(c);
 }
 
 void ObjectManager::SetRectBox(Object& obj, Vec& size)
 {
-    RectBox *r = new RectBox(Rect(obj.GetPos(), size));
+    RectHitbox *r = new RectHitbox(Rect(obj.GetPos(), size));
     obj.SetHitbox(r);
 }

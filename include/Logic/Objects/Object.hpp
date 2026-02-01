@@ -16,7 +16,7 @@ protected:
     double angle;
     double angle_vel;
     bool angle_locked = false;
-    CollideObject *hitbox;
+    Hitbox *hitbox;
 
 public:
     Object();
@@ -34,20 +34,20 @@ public:
     void Draw();
     
     void SetVel(const Vec& new_vel);
-    Vec GetVel();
+    Vec GetVel() const;
 
     void SetAcc(const Vec& new_acc);
-    Vec GetAcc();
+    Vec GetAcc() const;
 
     void SetSprite(const Sprite& new_sprite);
-    Sprite GetSprite();
+    Sprite GetSprite() const;
 
     void SetAngleVel(double new_angle_vel);
-    double GetAngleVel();
+    double GetAngleVel() const;
 
     void SetAngle(double new_angle);
-    double GetAngle();
+    double GetAngle() const;
 
-    void SetHitbox(CollideObject *c);
-    CollideObject *GetHitbox();
+    void SetHitbox(Hitbox *c);
+    Hitbox *GetHitbox() const;
 };

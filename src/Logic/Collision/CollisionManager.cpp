@@ -2,7 +2,7 @@
 
 
 
-bool CollisionManager::CollideRectToRect(RectBox rec1, RectBox rec2)
+bool CollisionManager::CollideRectToRect(const RectHitbox& rec1,const RectHitbox& rec2)
 {
     Vec pos1 = rec1.GetPos();
     Vec pos2 = rec2.GetPos();
@@ -11,7 +11,7 @@ bool CollisionManager::CollideRectToRect(RectBox rec1, RectBox rec2)
         pos1.y < pos2.y + rec2.size.y &&
         pos1.y + rec1.size.y> pos2.y);
 }
-bool CollisionManager::CollideCircleToCircle(CircleBox c1, CircleBox c2)
+bool CollisionManager::CollideCircleToCircle(const CircleHitbox& c1, const CircleHitbox& c2)
 {
     double limit_distance = c1.radius + c2.radius;
     return dist_sq(c1.GetPos(), c2.GetPos()) < (limit_distance * limit_distance);

@@ -24,6 +24,7 @@ void BaseObject::SetPos(const Vec& new_pos){
     pos = new_pos;
 }
 
-Vec BaseObject::GetPos(){
+Vec BaseObject::GetPos() const 
+{
     return pos;
 }

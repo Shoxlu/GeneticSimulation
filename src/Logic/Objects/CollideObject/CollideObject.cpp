@@ -1,33 +1,67 @@
 #include <Logic/Objects/CollideObject/CollideObject.hpp>
+#include <Logic/Collision/CollisionManager.hpp>
 
-CollideObject::CollideObject(const Vec& pos):BaseObject(pos)
+
+Hitbox::Hitbox(const Vec& pos):BaseObject(pos)
 {
 
 }
 
-bool CollideObject::CanCollideWithGroup(size_t id){
+bool Hitbox::CanCollideWithGroup(size_t id){
     return group_dest[id];
 }
 
-bool CollideObject::isInGroup(size_t id){
+bool Hitbox::isInGroup(size_t id){
     return group_source[id];
 }
 
-void CollideObject::SetGroupDest(size_t id, bool value)
+void Hitbox::SetGroupDest(size_t id, bool value)
 {
     group_dest[id] = value;
 }
-void CollideObject::SetGroupSrc(size_t id, bool value)
+void Hitbox::SetGroupSrc(size_t id, bool value)
 {
     group_source[id] = value;
 }
 
-CircleBox::CircleBox(const Vec &pos,const float radius): CollideObject(pos), radius(radius)
+CircleHitbox::CircleHitbox(const Vec &pos,const float radius): Hitbox(pos), radius(radius)
 {
 
 }
 
-RectBox::RectBox(const Rect& rect): CollideObject(rect.pos), size(rect.size)
+RectHitbox::RectHitbox(const Rect& rect): Hitbox(rect.pos), size(rect.size)
 {
     
+}
+
+bool RectHitbox::Collide(const Hitbox &h) const
+{
+    return h.CollideWithRect(*this);
+}
+
+bool RectHitbox::CollideWithRect(const RectHitbox &h) const
+{
+    return CollisionManager::CollideRectToRect(*this, h);  
+}
+
+bool RectHitbox::CollideWithCircle(const CircleHitbox &h) const
+{
+    /*TODO: Implémenter Rect-Cirle collision*/
+    Vec a = h.GetPos();
+    return true;
+}
+
+bool CircleHitbox::Collide(const Hitbox &h) const
+{
+    return h.CollideWithCircle(*this);
+}
+
+bool CircleHitbox::CollideWithRect(const RectHitbox &h) const
+{
+    return h.CollideWithCircle(*this);
+}
+
+bool CircleHitbox::CollideWithCircle(const CircleHitbox &h) const
+{
+    return CollisionManager::CollideCircleToCircle(*this, h);
 }

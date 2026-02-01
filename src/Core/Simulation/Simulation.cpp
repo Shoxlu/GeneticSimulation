@@ -39,9 +39,7 @@ void Simulation::DoCollisionsFruitAgent()
 {
     for(FitObject& obj: objects){
         for(Fruit& fruit: fruits){
-            if (CollisionManager::CollideCircleToCircle(
-                *(CircleBox*)(obj.GetHitbox()),
-                *(CircleBox*)(fruit.GetHitbox()))){
+            if (obj.GetHitbox()->Collide(*fruit.GetHitbox())){
                 printf("Collision\n");
             }
         }

@@ -8,8 +8,8 @@ public:
     BaseObject(const Vec& pos_initial);
     ~BaseObject();
     void Update();
-    Vec GetPos();
-    void SetPos(const Vec& new_pos);
+    virtual Vec GetPos() const;
+    virtual void SetPos(const Vec& new_pos);
     // Accessible par les héritiers et soi-même
 protected:
     Vec pos;

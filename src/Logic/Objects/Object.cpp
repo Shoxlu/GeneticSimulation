@@ -87,15 +87,15 @@ void Object::SetSprite(const Sprite& new_sprite){
     sprite = new_sprite;
 }
 
-Vec Object::GetVel(){
+Vec Object::GetVel() const{
     return vel;
 }
 
-Vec Object::GetAcc(){
+Vec Object::GetAcc() const{
     return acc;
 }
 
-Sprite Object::GetSprite(){
+Sprite Object::GetSprite() const{
     return sprite;
 }
 
@@ -103,7 +103,7 @@ void Object::SetAngleVel(double new_angle_vel){
     angle_vel = new_angle_vel;
 }
 
-double Object::GetAngleVel(){
+double Object::GetAngleVel() const{
     return angle_vel;
 }
 
@@ -112,16 +112,16 @@ void Object::SetAngle(double new_angle){
     sprite.SetAngle(deg(angle));
 }
 
-double Object::GetAngle(){
+double Object::GetAngle() const{
     return angle;
 }
 
-void Object::SetHitbox(CollideObject* c)
+void Object::SetHitbox(Hitbox* c)
 {
     hitbox = c;
 }
 
-CollideObject* Object::GetHitbox()
+Hitbox* Object::GetHitbox() const
 {
     return hitbox;
 }

@@ -11,5 +11,6 @@ Code:
 -Trouver un moyen d'enlever une DrawFunc/UpdateFunc précise (et existante) des systèmes correspondants
 -Trouver un moyen de pas copier la file de priorite pour iterer dessus
 Autres:
+-Implémenter Rect-Cirle collision
 -Gérer les problèmes de SDL3.dll n'étant pas dans le bon dossier
 -Faire le todo
