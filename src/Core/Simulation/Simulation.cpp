@@ -11,15 +11,11 @@ World(width, height), dt(dt), engine(Engine::Instance()), window(window)
     objects.reserve(n_obj);
     for (size_t i = 0; i < n_obj; i++)
     {
-        printf("Avant\n");
         AddObjectToWorld();
-        printf("Apres\n");
         FitObject& obj = objects[i];
         obj.SetVel(Vec(Random::RandFloat(-1, 1), Random::RandFloat(-1, 1)));
         obj.SetPos(Vec(width / 2, height / 2));
-        printf("SetSprite\n");
         ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
-        printf("SetHitbox\n");
         ObjectManager::SetCircleBox(obj, 20.0);
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);
@@ -40,7 +36,8 @@ void Simulation::DoCollisionsFruitAgent()
     for(FitObject& obj: objects){
         for(Fruit& fruit: fruits){
             if (obj.GetHitbox()->Collide(*fruit.GetHitbox())){
-                printf("Collision\n");
+                obj.DoCollide(fruit);
+                fruit.DoCollide(obj);
             }
         }
     }

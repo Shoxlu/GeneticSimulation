@@ -45,6 +45,8 @@ void Object::UnlockAngle(){
 
 void Object::Update(double dt)
 {
+    if(!is_active)
+        return;
     UpdatePos(dt);
     UpdateAngle(dt);
     UpdateHitbox();
@@ -128,6 +130,8 @@ Hitbox* Object::GetHitbox() const
 
 void Object::Draw()
 {
+    if(!is_active)
+        return;
     sprite.Draw(pos);
 }
 

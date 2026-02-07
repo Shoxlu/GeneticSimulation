@@ -9,6 +9,7 @@ private:
 public:
     Fruit();
     Fruit(const Vec& pos);
+    void DoCollide(Object &obj);
     ~Fruit();
 };
 

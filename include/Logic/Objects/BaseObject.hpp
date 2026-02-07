@@ -7,12 +7,14 @@ public:
     BaseObject();
     BaseObject(const Vec& pos_initial);
     ~BaseObject();
-    void Update();
+    virtual void Update(double dt);
+    bool IsActive() const;
     virtual Vec GetPos() const;
     virtual void SetPos(const Vec& new_pos);
     // Accessible par les héritiers et soi-même
 protected:
     Vec pos;
-// Accessible par soi-même
+    bool is_active;
+    // Accessible par soi-même
 private:
 };
