@@ -10,4 +10,5 @@ private:
 public:
     size_t specie;
     GeneticInfo();
+    void Random();
 };

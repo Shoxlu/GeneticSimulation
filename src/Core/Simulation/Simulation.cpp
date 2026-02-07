@@ -9,17 +9,8 @@ World(width, height), dt(dt), engine(Engine::Instance()), window(window)
     //ObjectManager::RandomizeSet(objects, Vec(0, width), Vec(0, height));
     //C'est du code test.
     objects.reserve(n_obj);
-    for (size_t i = 0; i < n_obj; i++)
-    {
-        AddObjectToWorld();
-        FitObject& obj = objects[i];
-        obj.SetVel(Vec(Random::RandFloat(-1, 1), Random::RandFloat(-1, 1)));
-        obj.SetPos(Vec(width / 2, height / 2));
-        ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
-        ObjectManager::SetCircleBox(obj, 20.0);
-        Vec pos = obj.GetPos();
-        log_printf("%f, %f\n", pos.x, pos.y);
-    }
+    std::vector<FitObject> to_add = FirstGeneration(n_obj);
+    AddObjects(to_add);
     Fruit fruit(Vec(300, 300));
     ObjectManager::SetObjSprite(fruit, window, "../img/fruit.bmp");
     ObjectManager::SetCircleBox(fruit, 20.0);
@@ -31,11 +22,31 @@ Simulation::~Simulation()
     
 }
 
+void Simulation::AddObjects(std::vector<FitObject> &to_add)
+{
+    size_t n_obj = to_add.size();
+    objects.reserve(n_obj);
+    for (size_t i = 0; i < n_obj; i++)
+    {
+        FitObject& obj = to_add[i];
+        obj.SetVel(Vec(Random::RandFloat(-1, 1), Random::RandFloat(-1, 1)));
+        obj.SetPos(Vec(width / 2, height / 2));
+        ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
+        ObjectManager::SetCircleBox(obj, 20.0);
+        Vec pos = obj.GetPos();
+        log_printf("%f, %f\n", pos.x, pos.y);
+        AddObjectToWorld(obj);
+    }
+}
+
 void Simulation::DoCollisionsFruitAgent()
 {
     for(FitObject& obj: objects){
         for(Fruit& fruit: fruits){
-            if (obj.GetHitbox()->Collide(*fruit.GetHitbox())){
+            //log_printf("Collision Check\n");
+            Hitbox *hb_o = obj.GetHitbox();
+            Hitbox *hb_f = fruit.GetHitbox();
+            if (hb_o && hb_f && hb_o->Collide(*hb_f)){
                 obj.DoCollide(fruit);
                 fruit.DoCollide(obj);
             }
@@ -45,7 +56,9 @@ void Simulation::DoCollisionsFruitAgent()
 
 void Simulation::UpdateSimulation()
 {
+    //log_printf("Begin\n");
     DoCollisionsFruitAgent();
     UpdateObjects(dt);
+    //log_printf("End\n");
 }
 

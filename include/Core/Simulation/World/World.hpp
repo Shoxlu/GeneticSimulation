@@ -9,9 +9,9 @@ class World
 public:
     World();
     World(double w, double h);
-    void AddObjectToWorld(FitObject& obj);
+    void AddObjectToWorld(FitObject obj);
     void AddObjectToWorld();
-    void AddFruitToWorld(Fruit& obj);
+    void AddFruitToWorld(Fruit obj);
     void UpdateObjects(double dt);
     ~World();
 protected:

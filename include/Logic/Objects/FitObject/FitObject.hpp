@@ -15,6 +15,7 @@ public:
     void DoCollide(Fruit& fruit);
     void DoCollide(FitObject& fruit);
     GeneticInfo GetGenes() const;
+    int GetFitness() const;
     ~FitObject();
 
 };

@@ -5,16 +5,29 @@
 
 
 class Specie{
-    public:
-        Specie();
-        ~Specie();
-        GeneticInfo Mutate();
-        GeneticInfo base_genes;
-        int average_fitness;
-        size_t n_indiv;
-
-    private:
-        
+public:
+    Specie();
+    ~Specie();
+    GeneticInfo Mutate();
+    bool operator<(Specie& other){
+        return average_fitness < other.average_fitness;
+    }
+    bool operator<=(Specie& other){
+        return average_fitness <= other.average_fitness;
+    }
+    bool operator>=(Specie& other){
+        return average_fitness >= other.average_fitness;
+    }
+    bool operator>(Specie& other){
+        return average_fitness <= other.average_fitness;
+    }
+    bool operator==(Specie& other){
+        return average_fitness == other.average_fitness;
+    }
+    GeneticInfo base_genes;
+    int average_fitness;
+    size_t n_indiv;
+private:
 
 };
 
@@ -22,8 +35,12 @@ class Generation
 {
     public:
         Generation();
-        void NewGeneration();
+        std::vector<FitObject> FirstGeneration(size_t size);
+        std::vector<FitObject> NewGenerationSimple(std::vector<FitObject> &old_generation);
+        std::vector<FitObject> NewGeneration(std::vector<FitObject>& old_generation);
         void EndGeneration(std::vector<FitObject>& objs);
+        //Create a new individual from the specie specie
+        GeneticInfo CreateNewIndividual(size_t specie);
         //Create a child from a breed between specie1 and specie2
         GeneticInfo CreateNewIndividual(size_t specie1, size_t specie2);
         // Create a child from a breed between obj1 and obj2;
@@ -31,6 +48,7 @@ class Generation
         //Check all objects to determine their new specie, if it has changed
         //Updates the species table according to the modifications. Should be ran after mutations.
         void UpdateSpecies(std::vector<FitObject>& objs);
+        void SortSpecies();
         //Determines to which specie the genes should belong
         //Creates a new one if it is too far from any known one
         Specie FindNewSpecie(GeneticInfo &genes);
@@ -42,6 +60,8 @@ class Generation
 
         Specie GetBestSpecie() const;
         void SetBestSpecie(Specie &specie);
+
+        int GetAllFitness();
 
     private:
         std::vector<Specie> species;
