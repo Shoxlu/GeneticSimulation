@@ -11,9 +11,10 @@ private:
 
 public:
     FitObject();
+    FitObject(const GeneticInfo& infos);
     void DoCollide(Fruit& fruit);
     void DoCollide(FitObject& fruit);
-    FitObject(const GeneticInfo& infos);
+    GeneticInfo GetGenes() const;
     ~FitObject();
 
 };

@@ -4,8 +4,10 @@
 class GeneticInfo
 {
 private:
-    size_t specie;
+
+
 
 public:
+    size_t specie;
     GeneticInfo();
 };

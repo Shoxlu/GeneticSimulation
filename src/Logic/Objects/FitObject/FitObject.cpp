@@ -26,6 +26,11 @@ void FitObject::DoCollide(FitObject& obj){
 }
 
 
+GeneticInfo FitObject::GetGenes() const
+{
+    return genes;
+}
+
 FitObject::~FitObject()
 {
 }
