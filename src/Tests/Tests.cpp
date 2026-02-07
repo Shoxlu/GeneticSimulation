@@ -14,6 +14,13 @@ void PrintHeap(HeapMin<int> h){
     log_printf("\n");
 }
 
+void PrintTab(std::vector<int> t){
+    for(int& i : t){
+        log_printf("%d, ", i);
+    }
+    log_printf("\n");
+}
+
 void PrintQueue(PriorityQueue<float> h){
     std::vector<OrderedPair<float>> data = h.GetRawData();
     for(OrderedPair<float>& i : data){
@@ -68,7 +75,22 @@ void heap_test()
         log_printf("%f %d, ", elm1.value, elm1.key);
     }
     log_printf("\nEnd of PrioQueue tests\n");
+    std::vector<int> t;
+    t.emplace_back(3);
+    t.emplace_back(1);
+    t.emplace_back(5);
+    t.emplace_back(2);
+    t.emplace_back(9);
+    t.emplace_back(7);
+    HeapSortDescending(t);
+    log_printf("Heap Sort descending:\n");
+    PrintTab(t);
+    t.emplace_back(192);
+    HeapSortDescending(t);
+    log_printf("Heap Sort descending 2:\n");
+    PrintTab(t);
 }
+
 
 void vec_tests(){
     Vec a = Vec(1, 2);
