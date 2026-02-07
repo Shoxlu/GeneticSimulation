@@ -10,6 +10,7 @@ class Hitbox:public BaseObject
 {
 public:
     Hitbox(const Vec &pos);
+    virtual ~Hitbox();
     //inutilisé
     bool isInGroup(size_t id);
     bool CanCollideWithGroup(size_t group_id);

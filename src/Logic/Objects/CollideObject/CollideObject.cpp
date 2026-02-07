@@ -7,6 +7,11 @@ Hitbox::Hitbox(const Vec& pos):BaseObject(pos)
 
 }
 
+Hitbox::~Hitbox()
+{
+    
+}
+
 bool Hitbox::CanCollideWithGroup(size_t id){
     return group_dest[id];
 }
