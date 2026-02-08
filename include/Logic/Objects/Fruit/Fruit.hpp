@@ -10,6 +10,7 @@ public:
     Fruit();
     Fruit(const Vec& pos);
     void DoCollide(Object &obj);
+    void SetActivity(bool new_activity);
     ~Fruit();
 };
 

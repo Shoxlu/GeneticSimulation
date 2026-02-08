@@ -6,7 +6,7 @@ typedef struct RGBA{
     {
         struct color4i{
             uint8_t r, g, b, a;
-        } rgba8;
-        int rgba;
+        } components;
+        int full;
     }rgba;
 } RGBA;

@@ -43,3 +43,8 @@ Texture& Texture::operator=(const Texture& other)
     data = other.data;
     return *this;
 }
+
+Window * Texture::GetWindow() const 
+{
+    return window;
+}

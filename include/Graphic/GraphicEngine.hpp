@@ -3,10 +3,11 @@
 #include <Graphic/Texture/Texture.hpp>
 #include <Graphic/Texture/TextureManager.hpp>
 #include <Graphic/Sprite/SpriteManager.hpp>
+#include <Graphic/Drawer/Drawer.hpp>
 #include <Logic/Objects/Object.hpp>
 #include <Utils/DrawFunc/DrawFuncManager.hpp>
 
-class GraphicEngine: public DrawFuncManager, protected SpriteManager
+class GraphicEngine: public Drawer, public DrawFuncManager, protected SpriteManager
 {
 private:
 

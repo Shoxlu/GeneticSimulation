@@ -14,6 +14,8 @@ World(width, height), dt(dt), engine(Engine::Instance()), window(window)
     Fruit fruit(Vec(300, 300));
     ObjectManager::SetObjSprite(fruit, window, "../img/fruit.bmp");
     ObjectManager::SetCircleBox(fruit, 20.0);
+    fruit.GetHitbox()->SetSprite(SpriteManager::CreateEmptySprite(window));
+    AddToDrawQueue<Hitbox>(*fruit.GetHitbox());
     AddFruitToWorld(fruit);
 }
 
@@ -33,6 +35,8 @@ void Simulation::AddObjects(std::vector<FitObject> &to_add)
         obj.SetPos(Vec(width / 2, height / 2));
         ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
         ObjectManager::SetCircleBox(obj, 20.0);
+        obj.GetHitbox()->SetSprite(SpriteManager::CreateEmptySprite(window));
+        AddToDrawQueue<Hitbox>(*obj.GetHitbox());
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);
         AddObjectToWorld(obj);

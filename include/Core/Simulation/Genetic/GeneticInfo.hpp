@@ -8,7 +8,10 @@ private:
 
 
 public:
-    size_t specie;
+    
     GeneticInfo();
     void Random();
+
+    //Specie the genes derive from
+    size_t specie;
 };

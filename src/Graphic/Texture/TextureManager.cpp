@@ -33,6 +33,7 @@ Texture TextureManager::LoadImage(Window& window, const char* path){
     SDL_Surface *surface = SDL_LoadBMP(path);
     if (!surface) {
         log_printf("Erreur SDL_LoadBMP: %s\n", SDL_GetError());
+        return text;
     }
     // Convertit en texture pour l’affichage
     SDL_Renderer *renderer = window.GetRenderer();
@@ -40,6 +41,7 @@ Texture TextureManager::LoadImage(Window& window, const char* path){
     SDL_DestroySurface(surface); // plus besoin de la surface
     if (!texture) {
         log_printf("Erreur SDL_CreateTextureFromSurface: %s\n", SDL_GetError());
+        return text;
     }
     textures[path] = Texture(&window, texture);
     log_printf("La texture %s a été chargée avec succès\n", path);
@@ -69,7 +71,7 @@ void TextureManager::DrawSquareOnTexture(SDL_Texture* texture, Vec pos, Vec rect
        
         for (int j = 0; j < std::min(rect_sdl.w, w); j++)
         {
-            ((int*)pix)[i*w+j] = color.rgba.rgba;
+            ((int*)pix)[i*w+j] = color.rgba.full;
         }
     }
     SDL_UnlockTexture(texture);

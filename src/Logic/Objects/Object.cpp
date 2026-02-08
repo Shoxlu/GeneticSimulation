@@ -1,5 +1,4 @@
 #include <Logic/Objects/Object.hpp>
-#include <Graphic/GraphicEngine.hpp>
 
 Object::Object():hitbox(nullptr)
 {
@@ -85,9 +84,6 @@ void Object::SetAcc(const Vec& new_acc){
     acc = new_acc;
 }
 
-void Object::SetSprite(const Sprite& new_sprite){
-    sprite = new_sprite;
-}
 
 Vec Object::GetVel() const{
     return vel;
@@ -97,9 +93,7 @@ Vec Object::GetAcc() const{
     return acc;
 }
 
-Sprite Object::GetSprite() const{
-    return sprite;
-}
+
 
 void Object::SetAngleVel(double new_angle_vel){
     angle_vel = new_angle_vel;

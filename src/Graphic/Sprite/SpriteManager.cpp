@@ -15,6 +15,14 @@ Sprite SpriteManager::CreateSprite(Window& window, const char *texture_name)
     return sprite;
 }
 
+Sprite SpriteManager::CreateEmptySprite(Window& window)
+{
+    Texture texture(&window);
+    Sprite sprite(texture);
+    return sprite;
+}
+
+
 
 void SpriteManager::DrawSprite(Window& window, Vec pos, Sprite& sprite)
 {

@@ -11,8 +11,6 @@ private:
 protected:
     Vec vel;
     Vec acc;
-    Sprite sprite;
-
     double angle;
     double angle_vel;
     bool angle_locked = false;
@@ -38,9 +36,6 @@ public:
 
     void SetAcc(const Vec& new_acc);
     Vec GetAcc() const;
-
-    void SetSprite(const Sprite& new_sprite);
-    Sprite GetSprite() const;
 
     void SetAngleVel(double new_angle_vel);
     double GetAngleVel() const;

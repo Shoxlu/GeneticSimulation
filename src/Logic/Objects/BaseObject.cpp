@@ -30,6 +30,20 @@ Vec BaseObject::GetPos() const
     return pos;
 }
 
+
+void BaseObject::SetSprite(const Sprite& new_sprite){
+    sprite = new_sprite;
+}
+
+Sprite BaseObject::GetSprite() const{
+    return sprite;
+}
+
 bool BaseObject::IsActive() const{
     return is_active;
+}
+
+void BaseObject::SetActivity(bool new_activity)
+{
+    is_active = new_activity;
 }

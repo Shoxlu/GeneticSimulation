@@ -19,5 +19,6 @@ public:
     ~Texture();
     void FreeTexture();
     bool HasData();
+    Window *GetWindow() const;
     Texture &operator=(const Texture &other);
 };

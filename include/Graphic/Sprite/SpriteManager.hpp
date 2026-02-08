@@ -12,7 +12,7 @@ public:
     SpriteManager(/* args */);
     ~SpriteManager();
     Sprite CreateSprite(Window& window, const char* texture_name);
-   
+    static Sprite CreateEmptySprite(Window &window);
 };
 
 
