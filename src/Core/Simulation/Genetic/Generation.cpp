@@ -30,8 +30,9 @@ std::vector<FitObject> Generation::FirstGeneration(size_t size)
     eve.Random();
     for (size_t i = 0; i < size; i++)
     {
-        GeneticInfo genes = CreateNewIndividual(adam, eve);
+        GeneticInfo genes = adam;
         new_objs.emplace_back(genes);
+        adam.Random();
     }
     return new_objs;
 }
