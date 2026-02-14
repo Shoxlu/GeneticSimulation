@@ -65,6 +65,11 @@ void RectHitbox::Draw()
     log_printf("La fonction de rendu pour RectHitbox n'est pas implémentée.\n");
 }
 
+void RectHitbox::Resize(double size_factor)
+{
+    size *= size_factor;
+}
+
 bool CircleHitbox::Collide(const Hitbox &h) const
 {
     return h.CollideWithCircle(*this);
@@ -85,4 +90,10 @@ void CircleHitbox::Draw()
     if(!is_active)
         return;
     Engine::DrawCircle(sprite.GetWindow(), pos, radius, RGBA{255, 255, 0, 255});
+}
+
+void CircleHitbox::Resize(double size)
+{
+    log_printf("Hello from resizing a circle hitbox with factor %f\n", size);
+    radius *= size;
 }

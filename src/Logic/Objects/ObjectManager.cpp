@@ -39,7 +39,19 @@ void ObjectManager::SetCircleBox(Object& obj, float radius)
     obj.SetHitbox(c);
 }
 
+void ObjectManager::SetCircleBox(FitObject& obj, float radius)
+{
+    CircleHitbox *c = new CircleHitbox(obj.GetPos(), radius);
+    obj.SetHitbox(c);
+}
+
 void ObjectManager::SetRectBox(Object& obj, Vec& size)
+{
+    RectHitbox *r = new RectHitbox(Rect(obj.GetPos(), size));
+    obj.SetHitbox(r);
+}
+
+void ObjectManager::SetRectBox(FitObject& obj, Vec& size)
 {
     RectHitbox *r = new RectHitbox(Rect(obj.GetPos(), size));
     obj.SetHitbox(r);

@@ -14,8 +14,12 @@ public:
     FitObject(const GeneticInfo& infos);
     void DoCollide(Fruit& fruit);
     void DoCollide(FitObject& fruit);
+    void Update(double dt);
     GeneticInfo GetGenes() const;
     int GetFitness() const;
+
+    void SetHitbox(Hitbox *c);
+
     ~FitObject();
 
 };

@@ -20,6 +20,7 @@ public:
     virtual bool CollideWithRect(const RectHitbox &h) const = 0;
     virtual bool CollideWithCircle(const CircleHitbox &h) const = 0;
     virtual void Draw() = 0;
+    virtual void Resize(double size) = 0;
 
 private:
     bool group_source[32]; //A quel groupe de collision l'objet appartient
@@ -36,7 +37,7 @@ public:
     bool CollideWithRect(const RectHitbox &h) const;
     bool CollideWithCircle(const CircleHitbox &h) const;
     void Draw();
-
+    void Resize(double size);
     Vec size;
 };
 
@@ -49,5 +50,6 @@ public:
     bool CollideWithRect(const RectHitbox &h) const;
     bool CollideWithCircle(const CircleHitbox &h) const;
     void Draw();
+    void Resize(double size);
     float radius;
 };

@@ -1,15 +1,12 @@
 
 Code:
--Rendre SDL3 utilisable i.e implémenter une petite fenêtre. DONE
 -Donner une structure à l'application DONE(?)
--Afficher une texture. DONE 
--Créer les classes "Objects" et ses dérivées.
 -Revision du code par rapport aux copies d'objets dans les arguments
--Créer un contexte dédié pour l'application ? Au lieu de tout mettre dans le main. DONE
--IMPLEMENTER UN TAS ET UNE FILE DE PRIORITE (pour DrawFuncManager et UpdateFuncManager) DONE
---Implementer le système de priorite pour les deux exécutions correspondantes DONE
 -Trouver un moyen d'enlever une DrawFunc/UpdateFunc précise (et existante) des systèmes correspondants
 -Trouver un moyen de pas copier la file de priorite pour iterer dessus
+-Implémenter le gène de couleur (color)
+-Implémenter la création d'un individu à partir de 2 autres
+
 Autres:
 -Implémenter Rect-Cirle collision
 -Gérer les problèmes de SDL3.dll n'étant pas dans le bon dossier
