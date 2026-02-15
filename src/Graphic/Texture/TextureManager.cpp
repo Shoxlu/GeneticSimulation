@@ -124,7 +124,8 @@ void TextureManager::DrawTexture(
     double angle
    )
 {
-    SDL_RenderTextureRotated(window.GetRenderer(), texture, src, dest, angle, nullptr, SDL_FLIP_NONE);
+    if(texture)
+        SDL_RenderTextureRotated(window.GetRenderer(), texture, src, dest, angle, nullptr, SDL_FLIP_NONE);
 }
 
 //Obsolete ?

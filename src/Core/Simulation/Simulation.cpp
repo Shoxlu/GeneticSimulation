@@ -11,6 +11,16 @@ World(width, height), dt(dt), engine(Engine::Instance()), window(window)
     objects.reserve(n_obj);
     std::vector<FitObject> to_add = FirstGeneration(n_obj);
     AddObjects(to_add);
+    SpawnFruits();
+}
+
+Simulation::~Simulation()
+{
+    
+}
+
+void Simulation::SpawnFruits()
+{
     Fruit fruit(Vec(300, 300));
     ObjectManager::SetObjSprite(fruit, window, "../img/fruit.bmp");
     ObjectManager::SetCircleBox(fruit, 20.0);
@@ -19,9 +29,17 @@ World(width, height), dt(dt), engine(Engine::Instance()), window(window)
     AddFruitToWorld(fruit);
 }
 
-Simulation::~Simulation()
+void Simulation::StartNewGeneration()
 {
-    
+    log_printf("Start new_gen\n");
+    timer = 0;
+    //EndGeneration(objects);
+    std::vector<FitObject> to_add = (objects);
+    DeleteAllObjects();
+    log_printf("Fin des delete d'objets\n");
+    DeleteAllFruits();
+    AddObjects(to_add);
+    SpawnFruits();
 }
 
 void Simulation::AddObjects(std::vector<FitObject> &to_add)
@@ -63,6 +81,13 @@ void Simulation::UpdateSimulation()
     //log_printf("Begin\n");
     DoCollisionsFruitAgent();
     UpdateObjects(dt);
+
+    if(timer >= MAX_SIMULATION_TIME)
+    {
+        StartNewGeneration();
+    }else{
+        timer += dt;
+    }
     //log_printf("End\n");
 }
 

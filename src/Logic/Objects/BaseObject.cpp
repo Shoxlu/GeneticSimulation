@@ -1,4 +1,5 @@
 #include <Logic/Objects/BaseObject.hpp>
+#include <Core/Engine.hpp>
 
 //Constructeur pour BaseObject
 BaseObject::BaseObject():pos(0, 0), is_active(true)
@@ -13,6 +14,7 @@ BaseObject::BaseObject(const Vec& pos_initial): pos(pos_initial), is_active(true
 
 //Destructeur pour BaseObject
 BaseObject::~BaseObject(){
+    log_printf("Delete BaseObject\n");
 }
 
 //Actualise les caractéristiques de BaseObject
@@ -46,4 +48,10 @@ bool BaseObject::IsActive() const{
 void BaseObject::SetActivity(bool new_activity)
 {
     is_active = new_activity;
+}
+
+void BaseObject::FreeRessources()
+{
+    DeleteDrawFunc(draw_id);
+    sprite.FreeTexture();
 }

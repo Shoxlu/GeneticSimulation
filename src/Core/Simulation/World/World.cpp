@@ -37,6 +37,16 @@ void World::UpdateObjects(double dt)
     }
 }
 
+void World::DeleteAllObjects()
+{
+    objects.clear();
+}
+
+void World::DeleteAllFruits()
+{
+    fruits.clear();
+}
+
 World::~World()
 {
 }

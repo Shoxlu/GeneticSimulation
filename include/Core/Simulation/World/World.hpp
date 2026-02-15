@@ -13,6 +13,8 @@ public:
     void AddObjectToWorld();
     void AddFruitToWorld(Fruit& obj);
     void UpdateObjects(double dt);
+    void DeleteAllObjects();
+    void DeleteAllFruits();
     ~World();
 protected:
     std::vector<Fruit> fruits;

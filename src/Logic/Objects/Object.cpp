@@ -1,5 +1,6 @@
 #include <Logic/Objects/Object.hpp>
 
+
 Object::Object():hitbox(nullptr)
 {
 }
@@ -94,7 +95,6 @@ Vec Object::GetAcc() const{
 }
 
 
-
 void Object::SetAngleVel(double new_angle_vel){
     angle_vel = new_angle_vel;
 }
@@ -127,5 +127,12 @@ void Object::Draw()
     if(!is_active)
         return;
     sprite.Draw(pos);
+}
+void Object::FreeRessources()
+{
+    BaseObject::FreeRessources();
+    if(hitbox)
+        delete hitbox;
+        
 }
 

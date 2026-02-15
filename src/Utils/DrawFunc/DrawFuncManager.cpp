@@ -10,11 +10,12 @@ DrawFuncManager::~DrawFuncManager()
 {
 }
 
-void DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
+int DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
 {
     DrawFunc f(func, 0);
     size_t id = funcs.Push(f, priority);
     funcs.GetRawData()[id].value.id = id;
+    return id;
 }
 void DrawFuncManager::DeleteDrawFunc(int id)
 {

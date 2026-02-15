@@ -17,6 +17,7 @@ protected:
     Hitbox *hitbox;
 
 public:
+
     Object();
     Object(const Vec& pos_initial);
     Object(const Vec &pos_initial, const Vec &vel_initial);
@@ -30,8 +31,9 @@ public:
     void LockAngle();
     void UnlockAngle();
     void Draw();
-    
-    void SetVel(const Vec& new_vel);
+    void FreeRessources();
+
+    void SetVel(const Vec &new_vel);
     Vec GetVel() const;
 
     void SetAcc(const Vec& new_acc);
@@ -45,4 +47,5 @@ public:
 
     void SetHitbox(Hitbox *c);
     Hitbox *GetHitbox() const;
+
 };

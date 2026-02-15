@@ -1,7 +1,6 @@
 #include <Logic/Objects/FitObject/FitObject.hpp>
 
 
-
 FitObject::FitObject(/* args */)
 {
 }
@@ -52,4 +51,5 @@ void FitObject::SetHitbox(Hitbox* c)
 
 FitObject::~FitObject()
 {
+
 }

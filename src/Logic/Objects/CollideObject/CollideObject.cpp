@@ -10,7 +10,8 @@ Hitbox::Hitbox(const Vec& pos):BaseObject(pos)
 
 Hitbox::~Hitbox()
 {
-    
+    log_printf("Delete Hitbox\n");
+    DeleteDrawFunc(draw_id);
 }
 
 bool Hitbox::CanCollideWithGroup(size_t id){

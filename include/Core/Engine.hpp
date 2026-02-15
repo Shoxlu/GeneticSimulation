@@ -21,9 +21,11 @@ public:
 template<typename T>
 void AddToDrawQueue(T& obj)
 {
-    Engine::Instance().AddDrawFunc(
+    obj.draw_id = Engine::Instance().AddDrawFunc(
         DrawFunc::GetDrawFuncFromMethod<T>(
             obj,
             T::Draw
         ), 0);
 }
+
+void DeleteDrawFunc(int id);
