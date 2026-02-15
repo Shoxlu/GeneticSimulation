@@ -42,7 +42,14 @@ void Random::Tests()
         assert(r <= 4 && r >= -3);
         // log_printf("%f,", r);
     }
-    // log_printf("\n");
+    float mu = 100;
+    float s = 20;
+    for(size_t i = 0; i < n_tests; i++)
+    {
+        float r = Random::NormalWithdraw(mu, s);
+        log_printf("%f,", r);
+    }
+    log_printf("\n");
 }
 
 void Random::Init(){
@@ -70,4 +77,36 @@ float Random::RandFloat(float min, float max)
 //Assume que min <= max...
 int Random::RandInt(int min, int max){
     return rand() % (max - min + 1) + min;
+}
+
+bool Random::RandBool()
+{
+    return RandInt(0, 1) == 1;
+}
+
+double Random::Normal(double mu,double sigma)
+{
+
+    double u1 = RandFloat01();
+    double u2 = RandFloat01();
+
+    // éviter log(0)
+    if (u1 < 1e-12)
+        u1 = 1e-12;
+
+    double z = std::sqrt(-2.0 * std::log(u1))
+                * std::cos(2.0 * M_PI * u2);
+
+    return mu + sigma * z;
+    // double gauss_constant = 1.0 / sqrt(2 * M_PI);
+    // double t = Random::RandFloat(-1, 1);
+    // return exp((-1.0 / 2.0) * (t - mu) * (t - mu) / (sigma * sigma))/(sigma*sqrt(2*M_PI));
+}
+double Random::NormalWithdraw(double x,double delta_x)
+{
+
+    return Normal(x, delta_x / 3);
+    // double gauss_constant = 1.0 / sqrt(2 * M_PI);
+    // double t = Random::RandFloat(-1, 1);
+    // return exp((-1.0 / 2.0) * (t - mu) * (t - mu) / (sigma * sigma))/(sigma*sqrt(2*M_PI));
 }

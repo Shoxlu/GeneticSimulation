@@ -10,6 +10,7 @@ public:
     
     GeneticInfo();
     void Random();
+    void Mutate(double weight);
 
     //Specie the genes derive from
     size_t specie;

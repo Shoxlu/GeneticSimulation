@@ -8,7 +8,6 @@ class Specie{
 public:
     Specie();
     ~Specie();
-    GeneticInfo Mutate();
     bool operator<(Specie& other){
         return average_fitness < other.average_fitness;
     }

@@ -11,3 +11,10 @@ void GeneticInfo::Random()
     speed = Random::RandFloat(0, 10);
     return;
 }
+
+void GeneticInfo::Mutate(double weight)
+{
+    size = Random::NormalWithdraw(size, 0.3)*weight;
+    speed = Random::NormalWithdraw(speed, speed*0.3)*weight;
+    //Color
+}

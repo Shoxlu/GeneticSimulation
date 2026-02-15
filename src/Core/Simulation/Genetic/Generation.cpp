@@ -11,11 +11,6 @@ Specie::~Specie()
 {
 
 }
-GeneticInfo Specie::Mutate() 
-{ 
-
-    return base_genes;
-}
 
 Generation::Generation() 
 {
@@ -30,17 +25,16 @@ std::vector<FitObject> Generation::FirstGeneration(size_t size)
     eve.Random();
     for (size_t i = 0; i < size; i++)
     {
-        GeneticInfo genes = adam;
+        GeneticInfo genes = CreateNewIndividual(adam, eve);
         new_objs.emplace_back(genes);
-        adam.Random();
     }
     return new_objs;
 }
 
 std::vector<FitObject> Generation::NewGeneration(std::vector<FitObject>& old_generation) 
 {
-    std::vector<FitObject> new_objs;
-
+    // std::vector<FitObject> new_objs;
+    return old_generation;
 }
 
 std::vector<FitObject> Generation::NewGenerationSimple(std::vector<FitObject>& old_generation) 
@@ -48,7 +42,7 @@ std::vector<FitObject> Generation::NewGenerationSimple(std::vector<FitObject>& o
     std::vector<FitObject> new_objs;
     size_t size = old_generation.size();
     int all_fitness = GetAllFitness();
-    int count = 0;
+    size_t count = 0;
     for (size_t i = 0; i < species.size(); i++)
     {
         Specie &s = species[i];
@@ -74,18 +68,39 @@ void Generation::EndGeneration(std::vector<FitObject>& objs)
 
 GeneticInfo Generation::CreateNewIndividual(size_t specie) 
 {
-    return GeneticInfo();
+    GeneticInfo b = species[specie].base_genes;
+    b.Mutate(1);
+    return b;
 }
 
 //The new individual gets half the specs of the first and second specie
 GeneticInfo Generation::CreateNewIndividual(size_t specie1, size_t specie2) 
 {
-    return GeneticInfo();
+    CreateNewIndividual(species[specie1].base_genes, species[specie2].base_genes);
 }
+
 //The new individual gets half the specs of the first and second parent
 GeneticInfo Generation::CreateNewIndividual(GeneticInfo& obj1, GeneticInfo& obj2) 
 {
-    return GeneticInfo();
+    GeneticInfo new_genes;
+    new_genes.speed = obj1.speed;
+    new_genes.size = obj1.size;
+    // RGBA new_color = obj1.color;
+
+    if(Random::RandBool())
+    {
+        new_genes.speed = obj2.speed;
+    }
+    if(Random::RandBool())
+    {
+        new_genes.size = obj2.size;
+    }
+    // if(Random::RandBool())
+    // {
+    //     new_color = obj2.color;
+    // }
+    new_genes.Mutate(1);
+    return new_genes;
 }
 
 void Generation::UpdateSpecies(std::vector<FitObject>& objs) 

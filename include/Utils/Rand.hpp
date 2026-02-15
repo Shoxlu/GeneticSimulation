@@ -11,8 +11,11 @@ public:
     static int RandInt(int min, int max);
     //Min et Max inclus
     static float RandFloat(float min, float max);
+    static bool RandBool();
     static void Init();
     static void InitSeed(int seed);
+    static double Normal(double mu, double sigma);
+    static double NormalWithdraw(double x, double delta_x);
     Random();
     ~Random();
 };
