@@ -3,7 +3,6 @@
 #include <Tests/Tests.hpp>
 #include <assert.h>
 
-
 int main(){
     tests();
     Application app;

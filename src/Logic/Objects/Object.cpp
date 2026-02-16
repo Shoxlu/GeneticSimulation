@@ -19,7 +19,7 @@ BaseObject(pos_initial), vel(vel_initial),hitbox(nullptr)
 
 Object::~Object()
 {
-    printf("Delete Object\n");
+    log_printf("Delete Object\n");
     // if(hitbox) Memory leak
     //     delete hitbox;
 }

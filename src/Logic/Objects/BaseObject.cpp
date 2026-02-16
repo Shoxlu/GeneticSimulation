@@ -53,5 +53,4 @@ void BaseObject::SetActivity(bool new_activity)
 void BaseObject::FreeRessources()
 {
     DeleteDrawFunc(draw_id);
-    sprite.FreeTexture();
 }

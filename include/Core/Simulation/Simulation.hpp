@@ -4,7 +4,7 @@
 #include <Core/Simulation/Genetic/Generation.hpp>
 #include <vector>
 
-#define MAX_SIMULATION_TIME 10
+#define MAX_SIMULATION_TIME 30
 
 class Simulation: public World, public Generation
 {

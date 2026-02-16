@@ -7,9 +7,11 @@ TextureManager::TextureManager(){
 }
 
 TextureManager::~TextureManager(){
+    log_printf("Free Texture Manager\n");
     for (auto& [key, value] : textures) {
         value.FreeTexture();
     }
+    textures.clear();
 }
 
 void TextureManager::FreeTexture(const char* path){

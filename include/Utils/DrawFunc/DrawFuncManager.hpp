@@ -11,6 +11,8 @@ class DrawFuncManager
 private:
     
     PriorityQueue<DrawFunc> funcs;
+    std::vector<int> free_ids;
+    int last_id = 0;
 
 public:
     DrawFuncManager();

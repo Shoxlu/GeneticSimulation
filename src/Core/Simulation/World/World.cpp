@@ -39,11 +39,19 @@ void World::UpdateObjects(double dt)
 
 void World::DeleteAllObjects()
 {
+    for(FitObject& obj:objects)
+    {
+        obj.FreeRessources();
+    }
     objects.clear();
 }
 
 void World::DeleteAllFruits()
 {
+    for(Fruit& obj:fruits)
+    {
+        obj.FreeRessources();
+    }
     fruits.clear();
 }
 
