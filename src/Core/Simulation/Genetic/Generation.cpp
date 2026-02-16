@@ -107,11 +107,12 @@ GeneticInfo Generation::CreateNewIndividual(GeneticInfo& obj1, GeneticInfo& obj2
 
 void Generation::UpdateSpecies(std::vector<FitObject>& objs) 
 {
-
+    //Next to be implemented
 }
 
 Specie Generation::FindNewSpecie(GeneticInfo &genes) 
 { 
+     //Next to be implemented
     return Specie();
 }
 

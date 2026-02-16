@@ -6,7 +6,7 @@ Code:
 -Trouver un moyen de pas copier la file de priorite pour iterer dessus
 -Implémenter le gène de couleur (color)
 -Implémenter la création d'un individu à partir de 2 autres
-
+-Implémenter les espèces
 Autres:
 -Implémenter Rect-Cirle collision
 -Gérer les problèmes de SDL3.dll n'étant pas dans le bon dossier
