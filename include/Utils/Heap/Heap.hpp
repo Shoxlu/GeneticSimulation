@@ -284,7 +284,10 @@ public:
     }
     void DeleteNodeByIndex(size_t id)
     {
-        ChangeKeyByIndex(id, INT32_MAX);
+        OrderedPair<T> temp = this->data[id];
+        this->data[id] = this->data[this->data.size()-1];
+        this->data[this->data.size() - 1] = temp;
+        HeapMin<OrderedPair<T>>::PercolateUp(id);
         this->data.pop_back();
     }
 };

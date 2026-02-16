@@ -1,6 +1,5 @@
 #include <Utils/DrawFunc/DrawFuncManager.hpp>
-
-
+#include <Utils/utils.hpp>
 
 DrawFuncManager::DrawFuncManager(/* args */): free_ids(0)
 {
@@ -10,7 +9,7 @@ DrawFuncManager::~DrawFuncManager()
 {
 }
 
-int DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
+size_t DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
 {
     DrawFunc f(func, 0);
     size_t index_in_heap = funcs.Push(f, priority);
@@ -26,7 +25,17 @@ int DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
         free_ids.pop_back();
     }
     funcs.GetRawData()[index_in_heap].value.id = id;
+    log_printf("Add: size: %lld, id %lld\n", funcs.size(), id);
     return id;
+}
+
+void Print_heap(PriorityQueue<DrawFunc> funcs)
+{
+    std::vector<OrderedPair<DrawFunc>> data = funcs.GetRawData();
+    for(OrderedPair<DrawFunc>& i : data){
+        log_printf("%d, ", i.value.id);
+    }
+    log_printf("\n");
 }
 void DrawFuncManager::DeleteDrawFunc(int id)
 {
@@ -37,9 +46,11 @@ void DrawFuncManager::DeleteDrawFunc(int id)
         {
             funcs.DeleteNodeByIndex(i);
             free_ids.emplace_back(id);
+            log_printf("del %d, id: %lld : size: %lld\n", id, i, funcs.size());
+            return;
         }
     }
-        
+    log_printf("Draw Func not found !!!\n");
 }
 
 void DrawFuncManager::CallDrawFuncs()

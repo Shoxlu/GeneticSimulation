@@ -17,7 +17,7 @@ private:
 public:
     DrawFuncManager();
     ~DrawFuncManager();
-    int AddDrawFunc(std::function<void()> f, int priority);
+    size_t AddDrawFunc(std::function<void()> f, int priority);
     void DeleteDrawFunc(int id);
     void CallDrawFuncs();
 };

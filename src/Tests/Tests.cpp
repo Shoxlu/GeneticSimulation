@@ -65,7 +65,9 @@ void heap_test()
     q.Push(3.7, 3);
     q.Push(1.2, 1);
     PrintQueue(q);
-    q.ChangeKey(2.3, 10);
+    // q.ChangeKey(2.3, 10);
+    // PrintQueue(q);
+    q.DeleteNode(2.9);
     PrintQueue(q);
     log_printf("Deconstruction of PrioQueue:\n");
     OrderedPair<float> elm1(0.0, 0);

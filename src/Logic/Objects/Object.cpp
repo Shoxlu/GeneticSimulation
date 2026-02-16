@@ -128,11 +128,16 @@ void Object::Draw()
         return;
     sprite.Draw(pos);
 }
+
 void Object::FreeRessources()
 {
+    log_printf("Free Ressources Object\n");
     BaseObject::FreeRessources();
     if(hitbox)
+    {
         delete hitbox;
-        
+        hitbox = nullptr;
+    }   
+    log_printf("Fin Free Ressources Object\n"); 
 }
 

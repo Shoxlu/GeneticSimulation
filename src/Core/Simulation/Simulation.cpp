@@ -40,6 +40,7 @@ void Simulation::StartNewGeneration()
     DeleteAllFruits();
     AddObjects(to_add);
     SpawnFruits();
+    
 }
 
 void Simulation::AddObjects(std::vector<FitObject> &to_add)
@@ -54,6 +55,7 @@ void Simulation::AddObjects(std::vector<FitObject> &to_add)
         ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
         ObjectManager::SetCircleBox(obj, 20.0);
         obj.GetHitbox()->SetSprite(SpriteManager::CreateEmptySprite(window));
+        log_printf("%p\n", obj.GetHitbox());
         AddToDrawQueue<Hitbox>(*obj.GetHitbox());
         Vec pos = obj.GetPos();
         log_printf("%f, %f\n", pos.x, pos.y);
@@ -85,6 +87,7 @@ void Simulation::UpdateSimulation()
     if(timer >= MAX_SIMULATION_TIME)
     {
         StartNewGeneration();
+        log_printf("End starting new_gen\n");
     }else{
         timer += dt;
     }

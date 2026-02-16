@@ -28,6 +28,7 @@ std::vector<FitObject> Generation::FirstGeneration(size_t size)
         GeneticInfo genes = CreateNewIndividual(adam, eve);
         new_objs.emplace_back(genes);
     }
+    UpdateSpecies(new_objs);
     return new_objs;
 }
 
@@ -56,6 +57,7 @@ std::vector<FitObject> Generation::NewGenerationSimple(std::vector<FitObject>& o
         if(count >= size)
             break;
     }
+    UpdateSpecies(new_objs);
     return new_objs;
 }
 
@@ -140,7 +142,8 @@ void Generation::SortSpecies()
 //The species table is sorted.
 void Generation::UpdateBestSpecie() 
 {
-    best_specie = species[0];
+    if(species.size() > 0)
+        best_specie = species[0];
 }
 Specie Generation::GetBestSpecie() const
 {

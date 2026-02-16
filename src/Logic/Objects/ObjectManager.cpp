@@ -25,6 +25,13 @@ void ObjectManager::RandomizeSet(std::vector<Object>& objects, const Vec& x_rang
     }
 }
 
+void ObjectManager::SetObjSprite(BaseObject& obj, Window& win, std::string path)
+{
+    Sprite sprite = Engine::Instance().CreateSprite(win, path.data());
+    sprite.CenterAnchor();
+    obj.SetSprite(sprite);
+}
+
 void ObjectManager::SetObjSprite(Object& obj, Window& win, std::string path)
 {
     Sprite sprite = Engine::Instance().CreateSprite(win, path.data());

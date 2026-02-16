@@ -23,6 +23,5 @@ void Engine::Terminate(){
 
 void DeleteDrawFunc(int id)
 {
-    if(id >=0)
-        Engine::Instance().DeleteDrawFunc(id);
+    Engine::Instance().DeleteDrawFunc(id);
 }
