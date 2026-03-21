@@ -7,20 +7,40 @@ class FitObject: public Object
 {
 private:
     int fitness;
-    GeneticInfo genes;
 
 public:
+    GeneticInfo genes;
     FitObject();
     FitObject(const GeneticInfo& infos);
     void DoCollide(Fruit& fruit);
     void DoCollide(FitObject& fruit);
     void Update(double dt);
-    GeneticInfo GetGenes() const;
+
     int GetFitness() const;
 
     void SetHitbox(Hitbox *c);
 
     ~FitObject();
+    bool operator<(FitObject& obj)
+    {
+        return fitness < obj.GetFitness();
+    }
+    bool operator<=(FitObject& obj)
+    {
+        return fitness <= obj.GetFitness();
+    }
+    bool operator>=(FitObject& obj)
+    {
+        return fitness >= obj.GetFitness();
+    }
+    bool operator>(FitObject& obj)
+    {
+        return fitness > obj.GetFitness();
+    }
+    bool operator==(FitObject& obj)
+    {
+        return fitness == obj.GetFitness();
+    }
 
 };
 

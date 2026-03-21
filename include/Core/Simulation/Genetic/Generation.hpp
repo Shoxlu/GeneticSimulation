@@ -2,33 +2,7 @@
 #include <vector>
 #include <Logic/Objects/FitObject/FitObject.hpp>
 #include <Core/Simulation/Genetic/GeneticInfo.hpp>
-
-
-class Specie{
-public:
-    Specie();
-    ~Specie();
-    bool operator<(Specie& other){
-        return average_fitness < other.average_fitness;
-    }
-    bool operator<=(Specie& other){
-        return average_fitness <= other.average_fitness;
-    }
-    bool operator>=(Specie& other){
-        return average_fitness >= other.average_fitness;
-    }
-    bool operator>(Specie& other){
-        return average_fitness <= other.average_fitness;
-    }
-    bool operator==(Specie& other){
-        return average_fitness == other.average_fitness;
-    }
-    GeneticInfo base_genes;
-    int average_fitness;
-    size_t n_indiv;
-private:
-
-};
+#include <Core/Simulation/Genetic/Specie.hpp>
 
 class Generation 
 {
@@ -50,12 +24,13 @@ class Generation
         void SortSpecies();
         //Determines to which specie the genes should belong
         //Creates a new one if it is too far from any known one
-        Specie FindNewSpecie(GeneticInfo &genes);
+        Specie FindNewSpecie(GeneticInfo genes);
         //Should be ran after the end of a generation
         void UpdateSpeciesScores(std::vector<FitObject>& objs);
         //Should be ran after the end of a generation
         void UpdateBestSpecie();
-
+        //Compute the score of proximity between a specie and some genes
+        double SpecieScore(Specie &specie, GeneticInfo &genes);
 
         Specie GetBestSpecie() const;
         void SetBestSpecie(Specie &specie);
@@ -63,6 +38,8 @@ class Generation
         int GetAllFitness();
 
     private:
+    
         std::vector<Specie> species;
         Specie best_specie;
+        int last_specie_id = -1;
 };

@@ -33,11 +33,6 @@ void FitObject::Update(double dt)
 
 }
 
-GeneticInfo FitObject::GetGenes() const
-{
-    return genes;
-}
-
 int FitObject::GetFitness() const
 {
     return fitness;

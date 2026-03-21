@@ -33,8 +33,9 @@ void Simulation::StartNewGeneration()
 {
     log_printf("Start new_gen\n");
     timer = 0;
-    //EndGeneration(objects);
-    std::vector<FitObject> to_add = (objects);
+    EndGeneration(objects);
+    std::vector<FitObject> to_add = NewGeneration(objects);
+    UpdateSpecies(to_add);
     DeleteAllObjects();
     log_printf("Fin des delete d'objets\n");
     DeleteAllFruits();
