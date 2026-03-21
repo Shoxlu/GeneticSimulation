@@ -1,11 +1,11 @@
 #include <Logic/Objects/FitObject/FitObject.hpp>
 
 
-FitObject::FitObject(/* args */)
+FitObject::FitObject(/* args */):fitness(0), genes()
 {
 }
 
-FitObject::FitObject(const GeneticInfo& infos): genes(infos)
+FitObject::FitObject(const GeneticInfo& infos): fitness(0), genes(infos)
 {
 
 }
@@ -13,7 +13,7 @@ FitObject::FitObject(const GeneticInfo& infos): genes(infos)
 void FitObject::DoCollide(Fruit& fruit){
     if(!is_active || !fruit.IsActive())
         return;
-    fitness++;
+    //fitness+=10000;
     log_printf("Obj %p a mangé le fruit %p\n", this, &fruit);
 }
 
@@ -29,11 +29,12 @@ void FitObject::Update(double dt)
     // log_printf("Hello From FitObject\n");
 
     //sprite.SetColor(genes.color);
+    Vec old_pos = pos;
     Object::Update(dt*genes.speed);//Well...
-
+    fitness += dist_sq(old_pos+dt*genes.speed*vel, old_pos);
 }
 
-int FitObject::GetFitness() const
+double FitObject::GetFitness() const
 {
     return fitness;
 }

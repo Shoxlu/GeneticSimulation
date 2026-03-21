@@ -13,9 +13,9 @@ class Generation
         std::vector<FitObject> NewGeneration(std::vector<FitObject>& old_generation);
         void EndGeneration(std::vector<FitObject>& objs);
         //Create a new individual from the specie specie
-        GeneticInfo CreateNewIndividual(size_t specie);
+        GeneticInfo CreateNewIndividual(int specie);
         //Create a child from a breed between specie1 and specie2
-        GeneticInfo CreateNewIndividual(size_t specie1, size_t specie2);
+        GeneticInfo CreateNewIndividual(int specie1, int specie2);
         // Create a child from a breed between obj1 and obj2;
         GeneticInfo CreateNewIndividual(GeneticInfo& obj1, GeneticInfo& obj2);
         //Check all objects to determine their new specie, if it has changed
@@ -35,7 +35,7 @@ class Generation
         Specie GetBestSpecie() const;
         void SetBestSpecie(Specie &specie);
 
-        int GetAllFitness();
+        double GetAllFitness();
 
     private:
     

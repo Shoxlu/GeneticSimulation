@@ -10,7 +10,7 @@ Hitbox::Hitbox(const Vec& pos):BaseObject(pos)
 
 Hitbox::~Hitbox()
 {
-    log_printf("Delete Hitbox\n");
+    //log_printf("Delete Hitbox\n");
     DeleteDrawFunc(draw_id);
 }
 
@@ -95,6 +95,6 @@ void CircleHitbox::Draw()
 
 void CircleHitbox::Resize(double size)
 {
-    log_printf("Hello from resizing a circle hitbox with factor %f\n", size);
+    //log_printf("Hello from resizing a circle hitbox with factor %f\n", size);
     radius *= size;
 }

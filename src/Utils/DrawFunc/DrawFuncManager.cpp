@@ -25,7 +25,7 @@ size_t DrawFuncManager::AddDrawFunc(std::function<void()> func, int priority)
         free_ids.pop_back();
     }
     funcs.GetRawData()[index_in_heap].value.id = id;
-    log_printf("Add: size: %lld, id %lld\n", funcs.size(), id);
+    //log_printf("Add: size: %lld, id %lld\n", funcs.size(), id);
     return id;
 }
 
@@ -46,7 +46,7 @@ void DrawFuncManager::DeleteDrawFunc(int id)
         {
             funcs.DeleteNodeByIndex(i);
             free_ids.emplace_back(id);
-            log_printf("del %d, id: %lld : size: %lld\n", id, i, funcs.size());
+            //log_printf("del %d, id: %lld : size: %lld\n", id, i, funcs.size());
             return;
         }
     }

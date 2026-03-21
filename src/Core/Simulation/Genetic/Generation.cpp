@@ -1,16 +1,7 @@
 #include <Core/Simulation/Genetic/Generation.hpp>
 #include <Utils/utils.hpp>
 
-#define DIFF_SPECIE 2.0
-
-Specie::Specie() 
-{
-
-}
-Specie::~Specie() 
-{
-
-}
+#define DIFF_SPECIE 0.6
 
 Generation::Generation() 
 {
@@ -25,7 +16,8 @@ std::vector<FitObject> Generation::FirstGeneration(size_t size)
     eve.Random();
     for (size_t i = 0; i < size; i++)
     {
-        GeneticInfo genes = CreateNewIndividual(adam, eve);
+        GeneticInfo genes; // CreateNewIndividual(adam, eve);
+        genes.Random();
         new_objs.emplace_back(genes);
     }
     UpdateSpecies(new_objs);
@@ -36,22 +28,34 @@ std::vector<FitObject> Generation::NewGeneration(std::vector<FitObject>& old_gen
 {
     std::vector<FitObject> new_objs;
     size_t size = old_generation.size();
-    int all_fitness = GetAllFitness();
-    printf("All fitness %d\n", all_fitness);
+    double all_fitness = GetAllFitness();
     size_t count = 0;
     for (size_t i = 0; i < species.size(); i++)
     {
         Specie &s = species[i];
-        int n_indiv = (int)round(size * (float)s.average_fitness / all_fitness);
-        for (int i = 0; i < n_indiv; i++)
+        if(s.n_indiv == 0)
+        {
+            log_printf("Skipped specie %d\n", i+1);
+            continue;
+        }
+        int n_indiv = (int)round(size * s.average_fitness / all_fitness);
+        log_printf("Number of new individuals for specie %d/%d: %d\n", i+1, species.size(), n_indiv);
+        for (int j = 0; j < n_indiv; j++)
         {
             GeneticInfo genes = CreateNewIndividual(i);
             new_objs.emplace_back(genes);
             count++;
+            if(count >= size)
+                break;
         }
         if(count >= size)
             break;
     }
+    for (size_t i = 0; i < size - count; i++)
+    {
+        new_objs.emplace_back(old_generation[i].genes);
+    }
+    printf("There are %d objects\n", new_objs.size());
     UpdateSpecies(new_objs);
     return new_objs;
 }
@@ -93,7 +97,7 @@ void Generation::EndGeneration(std::vector<FitObject>& objs)
     UpdateBestSpecie();
 }
 
-GeneticInfo Generation::CreateNewIndividual(size_t specie) 
+GeneticInfo Generation::CreateNewIndividual(int specie) 
 {
     GeneticInfo b = species[specie].base_genes;
     b.Mutate(1);
@@ -101,7 +105,7 @@ GeneticInfo Generation::CreateNewIndividual(size_t specie)
 }
 
 //The new individual gets half the specs of the first and second specie
-GeneticInfo Generation::CreateNewIndividual(size_t specie1, size_t specie2) 
+GeneticInfo Generation::CreateNewIndividual(int specie1, int specie2) 
 {
     return CreateNewIndividual(species[specie1].base_genes, species[specie2].base_genes);
 }
@@ -132,14 +136,20 @@ GeneticInfo Generation::CreateNewIndividual(GeneticInfo& obj1, GeneticInfo& obj2
 
 void Generation::UpdateSpecies(std::vector<FitObject>& objs) 
 {
+    for(Specie& s : species)
+    {
+        s.n_indiv = 0;
+    }
     for (FitObject& obj : objs)
     {
         GeneticInfo genes = obj.genes;
         Specie new_specie = FindNewSpecie(genes);
-        if(new_specie.id != genes.specie && last_specie_id != -1)
+        obj.genes.specie = new_specie.id;
+        if(genes.specie != -1)
         {
-            species[genes.specie].n_indiv--;
+            species[genes.specie].n_indiv++;
         }
+
     }
     //Supprimer les species vide.
     
@@ -173,7 +183,8 @@ Specie Generation::FindNewSpecie(GeneticInfo genes)
                 specie_min = i;
             }
         }
-        printf("Score max %f\n", score_min);
+        species[specie_min].all_time_indiv++;
+        species[specie_min].n_indiv++;
         if(score_min < DIFF_SPECIE)
         {
             return species[specie_min];
@@ -182,7 +193,8 @@ Specie Generation::FindNewSpecie(GeneticInfo genes)
     new_specie.base_genes = genes;
     new_specie.id = ++last_specie_id;
     new_specie.n_indiv = 1;
-    printf("New specie !\n");
+    new_specie.all_time_indiv = 1;
+    log_printf("New specie !\n");
     species.emplace_back(new_specie);
     return new_specie;
 }
@@ -192,17 +204,21 @@ void Generation::UpdateSpeciesScores(std::vector<FitObject>& objs)
 {
     for(Specie& s : species)
     {
-        s.average_fitness *= s.n_indiv;
+        log_printf("Number of individual of specie %x: %d\n", &s, s.n_indiv);
+        s.average_fitness *= s.all_time_indiv;
     }
     for(FitObject& obj : objs)
     {
         Specie &s = species[obj.genes.specie];
+        
         s.average_fitness += obj.GetFitness();
-        s.n_indiv++;
+        s.all_time_indiv++;
     }
-    for(Specie& s : species)
+    for (size_t i = 0; i < species.size(); i++)
     {
-        s.average_fitness /= s.n_indiv;
+        Specie &s = species[i];
+        s.average_fitness /= s.all_time_indiv;
+        printf("Fitness of specie %x: %f\n", &s, s.average_fitness);
     }
 }
 
@@ -223,13 +239,14 @@ Specie Generation::GetBestSpecie() const
     return best_specie;
 }
 
-int Generation::GetAllFitness()
+double Generation::GetAllFitness()
 {
-    int sum = 0;
+    double sum = 0;
     for(Specie& s : species)
     {
         sum += s.average_fitness;
     }
+    
     return sum;
 }
 

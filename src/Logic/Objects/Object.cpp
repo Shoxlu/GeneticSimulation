@@ -19,7 +19,7 @@ BaseObject(pos_initial), vel(vel_initial),hitbox(nullptr)
 
 Object::~Object()
 {
-    log_printf("Delete Object\n");
+    //log_printf("Delete Object\n");
     // if(hitbox) Memory leak
     //     delete hitbox;
 }
@@ -131,13 +131,13 @@ void Object::Draw()
 
 void Object::FreeRessources()
 {
-    log_printf("Free Ressources Object\n");
+    //log_printf("Free Ressources Object\n");
     BaseObject::FreeRessources();
     if(hitbox)
     {
         delete hitbox;
         hitbox = nullptr;
     }   
-    log_printf("Fin Free Ressources Object\n"); 
+    //log_printf("Fin Free Ressources Object\n"); 
 }
 

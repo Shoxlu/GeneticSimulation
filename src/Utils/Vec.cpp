@@ -83,7 +83,7 @@ double dist_sq(const Vec& a,const Vec& b){
     return (a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y);
 }
 
-double dist(const Vec& a,const Vec& b){
+double dist(const Vec& a,const Vec& b){ 
     return sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
 }
 

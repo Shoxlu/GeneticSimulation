@@ -14,7 +14,7 @@ BaseObject::BaseObject(const Vec& pos_initial): pos(pos_initial), is_active(true
 
 //Destructeur pour BaseObject
 BaseObject::~BaseObject(){
-    log_printf("Delete BaseObject\n");
+    //log_printf("Delete BaseObject\n");
 }
 
 //Actualise les caractéristiques de BaseObject

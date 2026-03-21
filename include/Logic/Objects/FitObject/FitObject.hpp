@@ -6,7 +6,7 @@
 class FitObject: public Object
 {
 private:
-    int fitness;
+    double fitness;
 
 public:
     GeneticInfo genes;
@@ -16,7 +16,7 @@ public:
     void DoCollide(FitObject& fruit);
     void Update(double dt);
 
-    int GetFitness() const;
+    double GetFitness() const;
 
     void SetHitbox(Hitbox *c);
 

@@ -98,15 +98,9 @@ double Random::Normal(double mu,double sigma)
                 * std::cos(2.0 * M_PI * u2);
 
     return mu + sigma * z;
-    // double gauss_constant = 1.0 / sqrt(2 * M_PI);
-    // double t = Random::RandFloat(-1, 1);
-    // return exp((-1.0 / 2.0) * (t - mu) * (t - mu) / (sigma * sigma))/(sigma*sqrt(2*M_PI));
 }
 double Random::NormalWithdraw(double x,double delta_x)
 {
 
     return Normal(x, delta_x / 3);
-    // double gauss_constant = 1.0 / sqrt(2 * M_PI);
-    // double t = Random::RandFloat(-1, 1);
-    // return exp((-1.0 / 2.0) * (t - mu) * (t - mu) / (sigma * sigma))/(sigma*sqrt(2*M_PI));
 }

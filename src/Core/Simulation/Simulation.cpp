@@ -37,7 +37,7 @@ void Simulation::StartNewGeneration()
     std::vector<FitObject> to_add = NewGeneration(objects);
     UpdateSpecies(to_add);
     DeleteAllObjects();
-    log_printf("Fin des delete d'objets\n");
+    //log_printf("Fin des delete d'objets\n");
     DeleteAllFruits();
     AddObjects(to_add);
     SpawnFruits();
@@ -51,15 +51,15 @@ void Simulation::AddObjects(std::vector<FitObject> &to_add)
     for (size_t i = 0; i < n_obj; i++)
     {
         FitObject& obj = to_add[i];
-        obj.SetVel(Vec(Random::RandFloat(-1, 1), Random::RandFloat(-1, 1)));
+        float angle = Random::RandFloat(-M_PI, M_PI);
+        obj.SetVel(Vec(cos(angle), sin(angle)));
+
         obj.SetPos(Vec(width / 2, height / 2));
         ObjectManager::SetObjSprite(obj, window, "../img/pawn.bmp");
         ObjectManager::SetCircleBox(obj, 20.0);
         obj.GetHitbox()->SetSprite(SpriteManager::CreateEmptySprite(window));
-        log_printf("%p\n", obj.GetHitbox());
         AddToDrawQueue<Hitbox>(*obj.GetHitbox());
         Vec pos = obj.GetPos();
-        log_printf("%f, %f\n", pos.x, pos.y);
         AddObjectToWorld(obj);
     }
 }

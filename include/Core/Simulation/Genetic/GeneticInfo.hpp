@@ -13,7 +13,7 @@ public:
     void Mutate(double weight);
 
     //Specie the genes derive from
-    size_t specie;
+    int specie;
     double speed = 1.0; //
     double size = 1.0; //only changes hitbox right now
     RGBA color; //(not implemented)
