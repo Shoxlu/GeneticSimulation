@@ -23,5 +23,6 @@ public:
     void AddObjects(std::vector<FitObject> &objs);
     void StartNewGeneration();
     void SpawnFruits();
+    void SpawnSingleFruit(double x, double y);
 };
 

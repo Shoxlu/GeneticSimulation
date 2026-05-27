@@ -65,6 +65,14 @@ bool Window::ManageEvents(){
         {
             return false;
         }
+        if (e.key.key == SDLK_1)
+        {
+            framerate = 100000;
+        }
+        if (e.key.key == SDLK_2)
+        {
+            framerate = 60;
+        }
     }
     return true;
 }

@@ -42,4 +42,5 @@ class Generation
         std::vector<Specie> species;
         Specie best_specie;
         int last_specie_id = -1;
+        size_t n_species = 0;
 };

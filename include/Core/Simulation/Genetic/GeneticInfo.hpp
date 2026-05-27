@@ -14,6 +14,7 @@ public:
 
     //Specie the genes derive from
     int specie;
+    double starting_angle = 0.0;
     double speed = 1.0; //
     double size = 1.0; //only changes hitbox right now
     RGBA color; //(not implemented)

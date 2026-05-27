@@ -15,8 +15,8 @@ void Fruit::DoCollide(Object &obj)
 {
     if(!is_active)
         return;
-    SetActivity(false);
-    log_printf("Le fruit %p a collisionné avec l'obj %p\n", this, &obj);
+    //SetActivity(false);
+    //log_printf("Le fruit %p a collisionné avec l'obj %p\n", this, &obj);
 }
 
 void Fruit::SetActivity(bool new_activity)

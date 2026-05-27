@@ -8,6 +8,7 @@ class FitObject: public Object
 private:
     double fitness;
 
+    bool can_eat;
 public:
     GeneticInfo genes;
     FitObject();

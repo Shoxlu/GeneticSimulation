@@ -1,19 +1,19 @@
 #include <Logic/Objects/FitObject/FitObject.hpp>
 
 
-FitObject::FitObject(/* args */):fitness(0), genes()
+FitObject::FitObject(/* args */):fitness(0), genes(), can_eat(true)
 {
 }
 
-FitObject::FitObject(const GeneticInfo& infos): fitness(0), genes(infos)
+FitObject::FitObject(const GeneticInfo& infos): fitness(0), genes(infos), can_eat(true)
 {
-
 }
 
 void FitObject::DoCollide(Fruit& fruit){
-    if(!is_active || !fruit.IsActive())
+    if(!is_active || !fruit.IsActive() || !can_eat)
         return;
-    //fitness+=10000;
+    fitness+=10000;
+    can_eat = false;
     log_printf("Obj %p a mangé le fruit %p\n", this, &fruit);
 }
 
@@ -21,7 +21,7 @@ void FitObject::DoCollide(Fruit& fruit){
 void FitObject::DoCollide(FitObject& obj){
     if(!is_active || !obj.IsActive())
         return;
-    log_printf("Obj %p a collisionné avec l'obj %p\n", this, &obj);
+    //log_printf("Obj %p a collisionné avec l'obj %p\n", this, &obj);
 }
 
 void FitObject::Update(double dt)

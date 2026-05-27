@@ -18,15 +18,22 @@ Simulation::~Simulation()
 {
     
 }
-
-void Simulation::SpawnFruits()
+void Simulation::SpawnSingleFruit(double x, double y)
 {
-    Fruit fruit(Vec(300, 300));
+    Fruit fruit(Vec(x, y));
     ObjectManager::SetObjSprite(fruit, window, "../img/fruit.bmp");
     ObjectManager::SetCircleBox(fruit, 20.0);
     fruit.GetHitbox()->SetSprite(SpriteManager::CreateEmptySprite(window));
     AddToDrawQueue<Hitbox>(*fruit.GetHitbox());
     AddFruitToWorld(fruit);
+}
+
+void Simulation::SpawnFruits()
+{
+    SpawnSingleFruit(400, 300);
+    SpawnSingleFruit(300, 300);
+    SpawnSingleFruit(200, 300);
+    SpawnSingleFruit(100, 300);
 }
 
 void Simulation::StartNewGeneration()
@@ -35,7 +42,6 @@ void Simulation::StartNewGeneration()
     timer = 0;
     EndGeneration(objects);
     std::vector<FitObject> to_add = NewGeneration(objects);
-    UpdateSpecies(to_add);
     DeleteAllObjects();
     //log_printf("Fin des delete d'objets\n");
     DeleteAllFruits();
@@ -51,7 +57,7 @@ void Simulation::AddObjects(std::vector<FitObject> &to_add)
     for (size_t i = 0; i < n_obj; i++)
     {
         FitObject& obj = to_add[i];
-        float angle = Random::RandFloat(-M_PI, M_PI);
+        double angle = obj.genes.starting_angle;
         obj.SetVel(Vec(cos(angle), sin(angle)));
 
         obj.SetPos(Vec(width / 2, height / 2));

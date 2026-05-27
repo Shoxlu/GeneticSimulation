@@ -6,14 +6,17 @@ GeneticInfo::GeneticInfo() : specie(-1)
 
 void GeneticInfo::Random()
 {
-    size = Random::RandFloat(0, 3);
-    speed = Random::RandFloat(0, 10);
+    //size = Random::RandFloat(0, 1);
+    speed = Random::RandFloat(0, 1);
+    starting_angle= Random::RandFloat(-M_PI, M_PI);
     return;
 }
 
 void GeneticInfo::Mutate(double weight)
 {
-    size = std::max(0.0,Random::NormalWithdraw(size, weight));
-    speed = std::max(0.0,Random::NormalWithdraw(speed, weight));
+    //size = abs(Random::NormalWithdraw(size, weight));
+    speed = abs(Random::NormalWithdraw(speed, weight));
+    starting_angle = Random::NormalWithdraw(starting_angle, M_PI/8);
+
     //Color
 }
